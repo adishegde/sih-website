@@ -1,5 +1,6 @@
-/* This file exports the redux store after configuring it. Configuring includes
- * applying middlewares, loading previous state from file etc,. */
+/* This file exports the function that returns the store after configuring it.
+ * Configuring includes applying middlewares, loading previous state from file
+ * etc,. */
 
 import { createStore, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
@@ -16,9 +17,27 @@ function configureStore() {
         middlewares.push(createLogger());
     }
 
+    // Initial state of store.
+    const initialState = {
+        // Required by redux-token-auth package
+        auth: {
+            currentUser: {
+                isLoading: false,
+                isSignedIn: false,
+                attributes: {
+                    id: null,
+                    name: null
+                }
+            }
+        }
+    };
+
     // Return the store
-    return createStore(rootReducer, applyMiddleware(...middlewares));
+    return createStore(
+        rootReducer,
+        initialState,
+        applyMiddleware(...middlewares)
+    );
 }
 
-// Export store object
-export default configureStore();
+export default configureStore;
