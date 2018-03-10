@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "styles/index.css";
 import App from "components/App";
 import { Provider } from "react-redux";
-import store from "configureStore";
+import configureStore from "configureStore";
 import registerServiceWorker from "registerServiceWorker";
-import { verifyCredentials } from "actions/redux-token-auth.js";
+import { verifyCredentials } from "actions/redux-token-auth";
+
+import "styles/index.css";
+import "semantic-ui-css/semantic.min.css";
+
+const store = configureStore();
 
 // Used to verify user from login details of previous session and also update
 // redux store

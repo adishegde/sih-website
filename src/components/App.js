@@ -1,35 +1,13 @@
-/*eslint-disable*/
-import React, { Component } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import UserLogin from "containers/UserLogin";
 
-import './App.css';
-import LoginScreen from './Loginscreen';
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state={
-      loginPage:[],
-      uploadScreen:[]
-    }
-  }
-  componentWillMount(){
-    var loginPage =[];
-    loginPage.push(<LoginScreen appContext={this}/>);
-    this.setState({
-                  loginPage:loginPage
-                    })
-  }
-  render() {
+export default function App() {
     return (
-      <div className="App">
-        {this.state.loginPage}
-        {this.state.uploadScreen}
-      </div>
+        <Router>
+            <div id="app">
+                <Route path="/login" component={UserLogin} />
+            </div>
+        </Router>
     );
-  }
 }
-
-export default App;
