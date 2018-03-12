@@ -4,11 +4,22 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import UserDashboard from "components/Dashboard";
+import SideMenu from "components/SideMenu";
 
 export default function UserAppRouter() {
     return (
         <div style={{ height: "100%", width: "100%" }}>
-            <Route path="/" exact component={UserDashboard} />
+            <SideMenu />
+            <div
+                id="main"
+                style={{
+                    marginLeft: "250px",
+                    minWidth: "550px",
+                    padding: "1em"
+                }}
+            >
+                <Route path="/" exact component={UserDashboard} />
+            </div>
         </div>
     );
 }
