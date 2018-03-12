@@ -43,14 +43,10 @@ export default class Login extends Component {
         }
 
         return (
-            <div className="login-form">
-                <style>{`
-                body > div,
-                body > div > div,
-                body > div > div > div.login-form {
-                    height: 100%;
-                }
-            `}</style>
+            <div
+                className="login-form"
+                style={{ height: "100%", width: "100%" }}
+            >
                 <Grid
                     textAlign="center"
                     style={{ height: "100%" }}

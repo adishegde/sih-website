@@ -12,7 +12,7 @@ const requireSignIn = generateRequireSignInWrapper({
 export default function App() {
     return (
         <Router>
-            <div id="app">
+            <div id="app" style={{ height: "100%", width: "100%" }}>
                 <Switch>
                     <Route path="/login" component={UserLogin} />
                     <Route path="/" component={requireSignIn(UserAppRouter)} />

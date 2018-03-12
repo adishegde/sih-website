@@ -4,7 +4,7 @@ import UserDashboard from "components/Dashboard";
 
 export default function UserAppRouter() {
     return (
-        <div>
+        <div style={{ height: "100%", width: "100%" }}>
             <Route path="/" exact component={UserDashboard} />
         </div>
     );
