@@ -5,8 +5,7 @@
 // The website name is exported through the .env file
 export const WebsiteName = process.env.REACT_APP_WEBSITE_NAME;
 
-// The URL of the api server is exported through the .env files depending on
-// environment
-export const ApiServer = process.env.REACT_APP_API_SERVER;
+// In development mode, the webpack server proxies the API server
+export const ApiServer = "/api";
 
-export const AuthUrl = ApiServer + "/auth";
+export const AuthUrl = `${ApiServer}/auth`;
