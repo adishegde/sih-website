@@ -3,3 +3,7 @@
 export function isAuthenticating(state) {
     return state.reduxTokenAuth.currentUser.isLoading;
 }
+
+export function getErrorMessage(state) {
+    return state.error;
+}

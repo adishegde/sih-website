@@ -4,11 +4,12 @@
 import { connect } from "react-redux";
 import Login from "components/Login";
 import { signInAndRedirect } from "actions/index";
-import { isAuthenticating } from "selectors/index";
+import { isAuthenticating, getErrorMessage } from "selectors/index";
 
 function mapStateToProps(state) {
     return {
-        isLoading: isAuthenticating(state)
+        isLoading: isAuthenticating(state),
+        errMssg: getErrorMessage(state)
     };
 }
 
