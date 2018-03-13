@@ -6,10 +6,13 @@ import { generateAuthActions } from "redux-token-auth";
 import { AuthUrl } from "utils/resources";
 
 const config = {
-    AuthUrl,
+    authUrl: AuthUrl,
     userAttributes: {
         name: "name",
-        id: "id"
+        id: "id",
+        email: "email",
+        nickname: "nickname",
+        image: "image"
     },
     userRegistrationAttributes: {}
 };

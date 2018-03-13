@@ -5,5 +5,5 @@ import { reduxTokenAuthReducer } from "redux-token-auth";
 
 // combineReducers returns root reducer
 export default combineReducers({
-    auth: reduxTokenAuthReducer
+    reduxTokenAuth: reduxTokenAuthReducer
 });

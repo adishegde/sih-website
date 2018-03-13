@@ -20,7 +20,7 @@ function configureStore() {
     // Initial state of store.
     const initialState = {
         // Required by redux-token-auth package
-        auth: {
+        reduxTokenAuth: {
             currentUser: {
                 isLoading: false,
                 isSignedIn: false,
