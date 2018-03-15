@@ -1,3 +1,6 @@
+/* This file exports the UserAppRouter component. It consists of the main
+ * routes for the App. */
+
 import React from "react";
 import { Route } from "react-router-dom";
 import UserDashboard from "components/Dashboard";

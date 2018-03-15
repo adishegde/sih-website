@@ -4,6 +4,10 @@ export function isAuthenticating(state) {
     return state.reduxTokenAuth.currentUser.isLoading;
 }
 
+export function isSignedIn(state) {
+    return state.reduxTokenAuth.currentUser.isSignedIn;
+}
+
 export function getErrorMessage(state) {
     return state.error;
 }
