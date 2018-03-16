@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Dimmer, Loader } from "semantic-ui-react";
-import { Redirect } from "react-router";
+import { Redirect } from "react-router-dom";
 import UserAppRouter from "./UserAppRouter";
 
 export default function RequireSignIn({ isAuthenticating, isSignedIn }) {

@@ -2,8 +2,11 @@
  * for accessing the features provided by the app. */
 
 import React from "react";
-import { Menu } from "semantic-ui-react";
+import { Menu, Icon } from "semantic-ui-react";
 import { WebsiteName } from "utils/resources";
+import { Link } from "react-router-dom";
+import FileMenu from "./FileMenu";
+import UserMenu from "containers/UserMenu";
 
 export default function SideMenu() {
     return (
@@ -11,6 +14,12 @@ export default function SideMenu() {
             <Menu.Item header style={{ fontSize: "18px" }}>
                 {WebsiteName}
             </Menu.Item>
+            <UserMenu />
+            <Menu.Item>
+                <Icon name="dashboard" />
+                <Link to="/">Dashboard</Link>
+            </Menu.Item>
+            <FileMenu />
         </Menu>
     );
 }
