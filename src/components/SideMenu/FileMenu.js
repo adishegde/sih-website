@@ -5,7 +5,7 @@ import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 
-export default function FileMenu({ onSignOut }) {
+export default function FileMenu() {
     return (
         <Menu.Item>
             <Menu.Header>File</Menu.Header>
