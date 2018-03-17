@@ -5,6 +5,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import UserDashboard from "containers/Dashboard";
 import SideMenu from "components/SideMenu/index";
+import CreateFile from "components/createFile/index";
 
 export default function UserAppRouter() {
     return (
@@ -19,6 +20,7 @@ export default function UserAppRouter() {
                 }}
             >
                 <Route path="/" exact component={UserDashboard} />
+                <Route path="/file/create" component={CreateFile} />
             </div>
         </div>
     );
