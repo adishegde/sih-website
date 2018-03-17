@@ -11,3 +11,7 @@ export function isSignedIn(state) {
 export function getErrorMessage(state) {
     return state.error;
 }
+
+export function getFileList(state) {
+    return state.files;
+}

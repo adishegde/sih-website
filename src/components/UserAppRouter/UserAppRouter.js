@@ -3,7 +3,7 @@
 
 import React from "react";
 import { Route } from "react-router-dom";
-import UserDashboard from "components/Dashboard";
+import UserDashboard from "containers/Dashboard";
 import SideMenu from "components/SideMenu/index";
 
 export default function UserAppRouter() {
