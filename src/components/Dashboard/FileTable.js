@@ -9,22 +9,14 @@
 
 import React from "react";
 import { Table } from "semantic-ui-react";
+import FileItem from "./FileItem";
 
 export default function FileTable({ files, tableName }) {
     // Don't render table if file list is null
     if (!files) return null;
 
     // Create rows of table using the file info passed as prop
-    const fileItems = files.map(file => (
-        <Table.Row key={file.id}>
-            <Table.Cell>{file.id}</Table.Cell>
-            <Table.Cell>{new Date(file.createdAt).toDateString()}</Table.Cell>
-            <Table.Cell>{file.name}</Table.Cell>
-            <Table.Cell>
-                {new Date(file.timeRecievedCurrentOwner).toDateString()}
-            </Table.Cell>
-        </Table.Row>
-    ));
+    const fileItems = files.map(file => <FileItem {...file} key={file.id} />);
 
     // Return the table component
     return (
@@ -33,7 +25,7 @@ export default function FileTable({ files, tableName }) {
                 <Table.Row>
                     <Table.HeaderCell
                         textAlign="center"
-                        colSpan="4"
+                        colSpan="5"
                         style={{ fontSize: "16px" }}
                     >
                         {tableName}
@@ -43,6 +35,7 @@ export default function FileTable({ files, tableName }) {
                     <Table.HeaderCell>Id</Table.HeaderCell>
                     <Table.HeaderCell>Created</Table.HeaderCell>
                     <Table.HeaderCell>Name</Table.HeaderCell>
+                    <Table.HeaderCell>Priority</Table.HeaderCell>
                     <Table.HeaderCell>Recieved</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>

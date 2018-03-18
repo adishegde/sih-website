@@ -3,6 +3,13 @@ import DashboardComponent from "components/Dashboard/index";
 import { connect } from "react-redux";
 import { updateFileList } from "actions/files";
 import { getFileList } from "selectors/index";
+import {
+    getFilesWithPriority,
+    getFilesSortedByTimeRecieved
+} from "selectors/files";
+
+// Number of files to display of each type
+const NUM_ITEMS = 5;
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -19,8 +26,22 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps(state) {
+    const files = getFileList(state);
+
+    const highPriority = getFilesSortedByTimeRecieved(
+        getFilesWithPriority(files, "high")
+    ).slice(0, NUM_ITEMS);
+    const mediumPriority = getFilesSortedByTimeRecieved(
+        getFilesWithPriority(files, "medium")
+    ).slice(0, NUM_ITEMS);
+    const lowPriority = getFilesSortedByTimeRecieved(
+        getFilesWithPriority(files, "low")
+    ).slice(0, NUM_ITEMS);
+
     return {
-        files: getFileList(state)
+        highPriority,
+        lowPriority,
+        mediumPriority
     };
 }
 
