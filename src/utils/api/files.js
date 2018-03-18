@@ -22,3 +22,9 @@ export function getAllFiles() {
         return data.map(item => transformFileResponse(item));
     });
 }
+
+export function createFile(data) {
+    return axios
+        .post("/file", data)
+        .then(({ data }) => transformFileResponse(data));
+}

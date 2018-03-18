@@ -1,9 +1,11 @@
 /* This file exports actions related to file list */
 
-import { getAllFiles } from "utils/api/files";
+import * as fileApi from "utils/api/files";
 
 export const RECIEVE_ALL_FILES = "RECIEVE_ALL_FILES";
 export const REQUEST_ALL_FILES = "REQUEST_ALL_FILES";
+export const REQUEST_CREATE_FILE = "REQUEST_CREATE_FILE";
+export const RECIEVE_CREATE_FILE = "RECIEVE_CREATE_FILE";
 
 function recieveAllFiles(files) {
     return {
@@ -18,13 +20,42 @@ function requestAllFiles() {
     };
 }
 
+function requestCreateFile() {
+    return {
+        type: REQUEST_CREATE_FILE
+    };
+}
+
+function recieveCreateFile(file) {
+    return {
+        type: RECIEVE_CREATE_FILE,
+        file
+    };
+}
+
 export function updateFileList() {
     return dispatch => {
         dispatch(requestAllFiles());
 
-        getAllFiles()
+        fileApi
+            .getAllFiles()
             .then(files => {
                 dispatch(recieveAllFiles(files));
+            })
+            .catch(error => {
+                // ignore error
+            });
+    };
+}
+
+export function createFile(data) {
+    return dispatch => {
+        dispatch(requestCreateFile());
+
+        fileApi
+            .createFile(data)
+            .then(file => {
+                dispatch(recieveCreateFile(file));
             })
             .catch(error => {
                 // ignore error
