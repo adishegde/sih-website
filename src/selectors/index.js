@@ -13,5 +13,12 @@ export function getErrorMessage(state) {
 }
 
 export function getFileList(state) {
-    return state.files;
+    return Object.values(state.files.list);
+}
+
+export function getCreatedFileId(state) {
+    const { files } = state;
+    if (files.loading) return null;
+
+    return files.created;
 }

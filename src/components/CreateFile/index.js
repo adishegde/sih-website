@@ -12,7 +12,7 @@ export default class CreateFile extends Component {
         this.state = {
             currentWindow: 1,
             name: "",
-            priority: 1,
+            priority: "low",
             properties: [""],
             customData: "",
             error: false

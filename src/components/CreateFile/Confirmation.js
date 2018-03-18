@@ -24,9 +24,6 @@ class Confirmation extends Component {
         const { fileId, fileData } = this.props;
 
         if (!fileId) {
-            const priorityText = ["Low", "Medium", "High"][
-                fileData.priority - 1
-            ];
             const properties = fileData.properties.map((item, idx) => (
                 <Label tag key={idx}>
                     {item}
@@ -49,7 +46,7 @@ class Confirmation extends Component {
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>Priority</Table.Cell>
-                                <Table.Cell>{priorityText}</Table.Cell>
+                                <Table.Cell>{fileData.priority}</Table.Cell>
                             </Table.Row>
                             <Table.Row>
                                 <Table.Cell>Properties/Tags</Table.Cell>
