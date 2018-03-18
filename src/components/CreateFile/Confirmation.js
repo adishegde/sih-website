@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Button, Confirm } from "semantic-ui-react";
+import { Container, Button, Confirm, Table, Label } from "semantic-ui-react";
 import { QRCode } from "react-qr-svg";
 
 class Confirmation extends Component {
@@ -21,11 +21,48 @@ class Confirmation extends Component {
     };
 
     render() {
-        const { fileId } = this.props;
+        const { fileId, fileData } = this.props;
 
         if (!fileId) {
+            const priorityText = ["Low", "Medium", "High"][
+                fileData.priority - 1
+            ];
+            const properties = fileData.properties.map((item, idx) => (
+                <Label tag key={idx}>
+                    {item}
+                </Label>
+            ));
+
             return (
                 <div align="middle">
+                    <Table definition>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell />
+                                <Table.HeaderCell>Value</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            <Table.Row>
+                                <Table.Cell>File Name</Table.Cell>
+                                <Table.Cell>{fileData.name}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Priority</Table.Cell>
+                                <Table.Cell>{priorityText}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Properties/Tags</Table.Cell>
+                                <Table.Cell>{properties}</Table.Cell>
+                            </Table.Row>
+                            <Table.Row>
+                                <Table.Cell>Comments</Table.Cell>
+                                <Table.Cell>
+                                    {fileData.customData || "None"}
+                                </Table.Cell>
+                            </Table.Row>
+                        </Table.Body>
+                    </Table>
                     <Button
                         onClick={this.show}
                         icon="send"

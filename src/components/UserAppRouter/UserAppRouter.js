@@ -5,7 +5,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import UserDashboard from "containers/Dashboard";
 import SideMenu from "components/SideMenu/index";
-import CreateFile from "components/createFile/index";
+import CreateFile from "components/CreateFile/index";
 
 export default function UserAppRouter() {
     return (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Message } from "semantic-ui-react";
 
 const options = [
     { key: 1, text: "Low", value: 1 },
@@ -11,10 +11,11 @@ export default function BasicInfo({
     onInputChange,
     nameValue,
     onContinue,
-    priorityValue
+    priorityValue,
+    error
 }) {
     return (
-        <Form>
+        <Form error={error}>
             <Form.Input
                 label="Name of the File"
                 fluid
@@ -40,6 +41,11 @@ export default function BasicInfo({
                     onClick={onContinue}
                 />
             </div>
+            <Message
+                error
+                header="Action Forbidden"
+                content="Name cannot be empty."
+            />
         </Form>
     );
 }

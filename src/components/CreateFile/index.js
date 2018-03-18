@@ -14,10 +14,12 @@ export default class CreateFile extends Component {
             name: "",
             priority: 1,
             properties: [""],
-            customData: ""
+            customData: "",
+            error: false
         };
 
-        this.onContinueStep = this.onContinueStep.bind(this);
+        this.onContinueBasicInfo = this.onContinueBasicInfo.bind(this);
+        this.onContinueProperties = this.onContinueProperties.bind(this);
         this.onBasicInfoChange = this.onBasicInfoChange.bind(this);
         this.onPropertyChange = this.onPropertyChange.bind(this);
         this.onPropertyAdd = this.onPropertyAdd.bind(this);
@@ -33,7 +35,8 @@ export default class CreateFile extends Component {
             name,
             priority,
             properties,
-            customData
+            customData,
+            error
         } = this.state;
         let { fileId } = this.props;
 
@@ -42,9 +45,10 @@ export default class CreateFile extends Component {
                 stepWindow = (
                     <BasicInfo
                         nameValue={name}
+                        error={error}
                         priorityValue={priority}
                         onInputChange={this.onBasicInfoChange}
-                        onContinue={this.onContinueStep}
+                        onContinue={this.onContinueBasicInfo}
                     />
                 );
                 break;
@@ -55,7 +59,7 @@ export default class CreateFile extends Component {
                         onPropertyAdd={this.onPropertyAdd}
                         onPropertyDelete={this.onPropertyDelete}
                         properties={properties}
-                        onContinue={this.onContinueStep}
+                        onContinue={this.onContinueProperties}
                         customDataValue={customData}
                         onCustomDataChange={this.onCustomDataChange}
                     />
@@ -66,6 +70,7 @@ export default class CreateFile extends Component {
                     <Confirmation
                         fileId={fileId}
                         onCreateFile={this.onCreateFile}
+                        fileData={{ name, priority, properties, customData }}
                     />
                 );
                 break;
@@ -83,12 +88,29 @@ export default class CreateFile extends Component {
         );
     }
 
-    onContinueStep(event) {
+    onContinueProperties(event) {
         event.preventDefault();
 
-        this.setState(({ currentWindow }) => ({
-            currentWindow: currentWindow + 1
+        this.setState(({ properties }) => ({
+            currentWindow: 3,
+            properties: properties.filter(item => item)
         }));
+    }
+
+    onContinueBasicInfo(event) {
+        event.preventDefault();
+
+        // If name is empty then show error
+        const { name } = this.state;
+        if (!name)
+            this.setState({
+                error: true
+            });
+        else
+            this.setState({
+                currentWindow: 2,
+                error: false
+            });
     }
 
     onBasicInfoChange(event, { name, value }) {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Step } from "semantic-ui-react";
 
-const createFileSteps = ({ activeStep }) => (
+const CreateFileSteps = ({ activeStep }) => (
     <div>
         <Step.Group attached="top">
             <Step active={activeStep === 1} completed={activeStep > 1}>
@@ -36,4 +36,4 @@ const createFileSteps = ({ activeStep }) => (
     </div>
 );
 
-export default createFileSteps;
+export default CreateFileSteps;
