@@ -3,7 +3,7 @@
 import { combineReducers } from "redux";
 import errorReducer from "reducers/error";
 import { reduxTokenAuthReducer } from "redux-token-auth";
-import filesReducer from "reducers/files";
+import filesReducer from "reducers/files/index";
 
 // combineReducers returns root reducer
 export default combineReducers({
