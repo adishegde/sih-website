@@ -6,7 +6,7 @@ import { Menu, Icon } from "semantic-ui-react";
 import { WebsiteName } from "utils/resources";
 import { Link } from "react-router-dom";
 import FileMenu from "./FileMenu";
-import UserMenu from "containers/UserMenu";
+import UserMenu from "containers/SideMenu/UserMenu";
 
 export default function SideMenu() {
     return (

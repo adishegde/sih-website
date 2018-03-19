@@ -6,13 +6,15 @@ export default function FileTable({
     createdAt,
     name,
     timeRecievedCurrentOwner,
-    priority
+    priority,
+    onClick
 }) {
     return (
         <Table.Row
             negative={priority === "high"}
             warning={priority === "medium"}
             positive={priority === "low"}
+            onClick={onClick}
         >
             <Table.Cell>{id}</Table.Cell>
             <Table.Cell>{new Date(createdAt).toDateString()}</Table.Cell>

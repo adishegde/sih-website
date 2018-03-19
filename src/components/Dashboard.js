@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Segment } from "semantic-ui-react";
-import FileTable from "./FileTable";
+import FileTable from "components/FileTable/index";
 
 export default function Dashboard({
     highPriority,

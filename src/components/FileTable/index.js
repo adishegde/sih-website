@@ -9,7 +9,7 @@
 
 import React from "react";
 import { Table } from "semantic-ui-react";
-import FileItem from "./FileItem";
+import FileItem from "containers/FileTable/FileItem";
 
 export default function FileTable({ files, tableName }) {
     // Don't render table if file list is null

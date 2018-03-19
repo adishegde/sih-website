@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import DashboardComponent from "components/Dashboard/index";
+import DashboardComponent from "components/Dashboard";
 import { connect } from "react-redux";
 import { updateFileList } from "actions/files";
 import { getFileList } from "selectors/index";
