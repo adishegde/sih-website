@@ -1,11 +1,26 @@
 /* This file exports the component FileSearch after passing appropriate props*/
 
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import FileSearch from "components/FileSearch";
+import FileSearchComponent from "components/FileSearch";
 import { getFileList } from "selectors/index";
 import { getFilesWithPriority, getFilesByName } from "selectors/files";
+import { updateFileList } from "actions/files";
 import querystring from "querystring";
+
+class FileSearch extends Component {
+    componentDidMount() {
+        const { fetchFileList } = this.props;
+
+        // Fetch file list from server
+        fetchFileList();
+    }
+
+    render() {
+        return <FileSearchComponent {...this.props} />;
+    }
+}
 
 function mapStateToProps(state, { history, location }) {
     // Get value from query string
@@ -54,4 +69,14 @@ function mapStateToProps(state, { history, location }) {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(FileSearch));
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchFileList: () => {
+            dispatch(updateFileList());
+        }
+    };
+}
+
+export default withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(FileSearch)
+);
