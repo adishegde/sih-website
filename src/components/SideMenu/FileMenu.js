@@ -14,6 +14,10 @@ export default function FileMenu() {
                     <Icon name="add circle" />
                     Create File
                 </Menu.Item>
+                <Menu.Item name="allFiles" as={NavLink} to="/file" exact>
+                    <Icon name="file text" />
+                    All Files
+                </Menu.Item>
             </Menu.Menu>
         </Menu.Item>
     );

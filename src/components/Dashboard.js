@@ -12,18 +12,18 @@ export default function Dashboard({
         <div align="middle">
             <Segment>
                 <FileTable tableName={"High Priority"} files={highPriority} />
-                <Link to="#">View All</Link>
+                <Link to="/file?priority=high">View All</Link>
             </Segment>
             <Segment>
                 <FileTable
                     tableName={"Medium Priority"}
                     files={mediumPriority}
                 />
-                <Link to="#">View All</Link>
+                <Link to="/file?priority=medium">View All</Link>
             </Segment>
             <Segment>
                 <FileTable tableName={"Low Priority"} files={lowPriority} />
-                <Link to="#">View All</Link>
+                <Link to="/file?priority=low">View All</Link>
             </Segment>
         </div>
     );

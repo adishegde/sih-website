@@ -2,9 +2,9 @@ import React from "react";
 import { Form, Message } from "semantic-ui-react";
 
 const options = [
-    { key: 1, text: "Low", value: "low" },
-    { key: 2, text: "Medium", value: "medium" },
-    { key: 3, text: "High", value: "high" }
+    { key: 1, text: "low", value: "low" },
+    { key: 2, text: "medium", value: "medium" },
+    { key: 3, text: "high", value: "high" }
 ];
 
 export default function BasicInfo({
