@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserLogin from "containers/UserLogin";
-import UserAppRouter from "containers/UserAppRouter";
+import UserAppRouter from "routes/UserAppRouter";
 
 export default function App() {
     return (
