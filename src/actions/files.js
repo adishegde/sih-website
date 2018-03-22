@@ -64,7 +64,7 @@ export function updateFileList() {
     };
 }
 
-export function createFile(data) {
+export function createFile(data, history) {
     return dispatch => {
         dispatch(requestCreateFile());
 
@@ -72,6 +72,7 @@ export function createFile(data) {
             .createFile(data)
             .then(file => {
                 dispatch(recieveCreateFile(file));
+                history.push(`/file/${file.id}`);
             })
             .catch(error => {
                 // ignore error

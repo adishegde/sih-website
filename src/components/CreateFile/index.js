@@ -38,7 +38,7 @@ export default class CreateFile extends Component {
             customData,
             error
         } = this.state;
-        let { fileId } = this.props;
+        let { isCreating } = this.props;
 
         switch (currentWindow) {
             case 1:
@@ -68,8 +68,8 @@ export default class CreateFile extends Component {
             case 3:
                 stepWindow = (
                     <Confirmation
-                        fileId={fileId}
                         onCreateFile={this.onCreateFile}
+                        isCreating={isCreating}
                         fileData={{ name, priority, properties, customData }}
                     />
                 );

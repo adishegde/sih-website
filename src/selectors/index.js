@@ -26,3 +26,9 @@ export function getCreatedFileId(state) {
 export function getFileWithId(state, id) {
     return state.files.list[id];
 }
+
+// Returns true if a request related to file has been sent but response hasn't
+// been recieved.
+export function isFileLoading(state) {
+    return state.files.loading;
+}
