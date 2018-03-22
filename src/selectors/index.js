@@ -22,3 +22,7 @@ export function getCreatedFileId(state) {
 
     return files.created;
 }
+
+export function getFileWithId(state, id) {
+    return state.files.list[id];
+}

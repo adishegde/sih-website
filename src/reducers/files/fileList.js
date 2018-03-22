@@ -1,6 +1,10 @@
 /* This file exports the reducer that handles the state of list of files */
 
-import { RECIEVE_ALL_FILES, RECIEVE_CREATE_FILE } from "actions/files";
+import {
+    RECIEVE_ALL_FILES,
+    RECIEVE_CREATE_FILE,
+    RECIEVE_FILE
+} from "actions/files";
 
 export default function fileListReducer(state = {}, action) {
     switch (action.type) {
@@ -9,8 +13,11 @@ export default function fileListReducer(state = {}, action) {
                 acc[file.id] = file;
                 return acc;
             }, {});
+
         case RECIEVE_CREATE_FILE:
+        case RECIEVE_FILE:
             return { ...state, [action.file.id]: action.file };
+
         default:
             return state;
     }

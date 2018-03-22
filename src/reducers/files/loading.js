@@ -6,17 +6,23 @@ import {
     REQUEST_CREATE_FILE,
     RECIEVE_CREATE_FILE,
     RECIEVE_ALL_FILES,
-    REQUEST_ALL_FILES
+    REQUEST_ALL_FILES,
+    REQUEST_FILE,
+    RECIEVE_FILE
 } from "actions/files";
 
 export default function loadingReducer(state = false, action) {
     switch (action.type) {
         case REQUEST_CREATE_FILE:
         case REQUEST_ALL_FILES:
+        case REQUEST_FILE:
             return true;
+
         case RECIEVE_CREATE_FILE:
         case RECIEVE_ALL_FILES:
+        case RECIEVE_FILE:
             return false;
+
         default:
             return state;
     }

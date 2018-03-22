@@ -23,8 +23,16 @@ export function getAllFiles() {
     });
 }
 
+// Request to create a new file
 export function createFile(data) {
     return axios
         .post("/file", data)
         .then(({ data }) => transformFileResponse(data));
+}
+
+// Get individual file
+export function getFile(id) {
+    return axios.get(`/file/${id}`).then(({ data }) => {
+        return transformFileResponse(data);
+    });
 }
