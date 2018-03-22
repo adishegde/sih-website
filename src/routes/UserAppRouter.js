@@ -8,7 +8,7 @@ import { isAuthenticating, isSignedIn } from "selectors/index";
 import { Dimmer, Loader } from "semantic-ui-react";
 import { Redirect, Route } from "react-router-dom";
 import SideMenu from "components/SideMenu/index";
-import CreateFile from "containers/CreateFile";
+import FileRouter from "routes/FileRouter";
 import UserDashboard from "containers/Dashboard";
 
 function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
@@ -33,7 +33,7 @@ function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
                     }}
                 >
                     <Route path="/" exact component={UserDashboard} />
-                    <Route path="/file/create" component={CreateFile} />
+                    <Route path="/file" component={FileRouter} />
                 </div>
             </div>
         );
