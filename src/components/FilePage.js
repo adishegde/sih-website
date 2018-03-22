@@ -64,7 +64,7 @@ export default function FilePage({
                 <Table>
                     <Table.Header>
                         <Table.Row>
-                            <Table.HeaderCell textAlign="center" colspan="2">
+                            <Table.HeaderCell textAlign="center" colSpan="2">
                                 {" "}
                                 <Header as="h3">{"File Details"}</Header>{" "}
                             </Table.HeaderCell>
@@ -109,11 +109,9 @@ export default function FilePage({
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
-                            <Table.Cell colspan={2}>
+                            <Table.Cell colSpan={2}>
                                 <Container text>
-                                    <p align="center">
-                                        <h4>Comments</h4>
-                                    </p>{" "}
+                                    <h4>Comments</h4>
                                     <hr /> <p>{customData}</p>
                                 </Container>
                             </Table.Cell>
