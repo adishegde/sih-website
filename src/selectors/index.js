@@ -36,3 +36,13 @@ export function getFileWithId(state, id) {
 export function isFileLoading(state) {
     return state.files.loading;
 }
+
+export function getGroupList(state) {
+    return Object.values(state.groups.list);
+}
+
+// Returns true if a request related to groups has been sent but
+// response hasn't been recieved.
+export function isGroupLoading(state) {
+    return state.groups.loading;
+}
