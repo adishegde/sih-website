@@ -7,8 +7,9 @@ import { WebsiteName } from "utils/resources";
 import { Link } from "react-router-dom";
 import FileMenu from "./FileMenu";
 import UserMenu from "containers/SideMenu/UserMenu";
+import AdminMenu from "containers/SideMenu/AdminMenu";
 
-export default function SideMenu() {
+export default function SideMenu({ isAdmin }) {
     return (
         <Menu fixed="left" style={{ width: "250px" }} inverted vertical>
             <Menu.Item header style={{ fontSize: "18px" }}>
@@ -20,6 +21,7 @@ export default function SideMenu() {
                 <Link to="/">Dashboard</Link>
             </Menu.Item>
             <FileMenu />
+            <AdminMenu />
         </Menu>
     );
 }

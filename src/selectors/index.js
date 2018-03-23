@@ -8,6 +8,10 @@ export function isSignedIn(state) {
     return state.reduxTokenAuth.currentUser.isSignedIn;
 }
 
+export function isUserSuperAdmin(state) {
+    return state.reduxTokenAuth.currentUser.attributes.role;
+}
+
 export function getErrorMessage(state) {
     return state.error;
 }
