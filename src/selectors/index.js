@@ -46,3 +46,9 @@ export function getGroupList(state) {
 export function isGroupLoading(state) {
     return state.groups.loading;
 }
+
+// Returns true if a request related to users has been sent but
+// response hasn't been recieved.
+export function isUserLoading(state) {
+    return state.users.loading;
+}
