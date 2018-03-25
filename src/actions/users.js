@@ -4,6 +4,21 @@ import * as userApi from "utils/api/users";
 
 export const RECIEVE_CREATE_USER = "RECIEVE_CREATE_USER";
 export const REQUEST_CREATE_USER = "REQUEST_CREATE_USER";
+export const RECIEVE_ALL_USERS = "RECIEVE_ALL_USERS";
+export const REQUEST_ALL_USERS = "REQUEST_ALL_USERS";
+
+function recieveAllUsers(users) {
+    return {
+        type: RECIEVE_ALL_USERS,
+        users
+    };
+}
+
+function requestAllUsers() {
+    return {
+        type: REQUEST_ALL_USERS
+    };
+}
 
 function requestCreateUser() {
     return {
@@ -49,5 +64,20 @@ export function createUser(data, history) {
         } catch (error) {
             // ignore
         }
+    };
+}
+
+export function updateUserList() {
+    return dispatch => {
+        dispatch(requestAllUsers());
+
+        userApi
+            .getAllUsers()
+            .then(users => {
+                dispatch(recieveAllUsers(users));
+            })
+            .catch(error => {
+                // ignore error
+            });
     };
 }

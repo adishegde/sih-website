@@ -52,3 +52,7 @@ export function isGroupLoading(state) {
 export function isUserLoading(state) {
     return state.users.loading;
 }
+
+export function getUserList(state) {
+    return Object.values(state.users.list);
+}

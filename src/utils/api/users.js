@@ -11,7 +11,7 @@ const userMapping = {
 
 const transformUserResponse = transformResponseData(userMapping);
 
-// Request to create a new file
+// Request to create a new user
 // data should have name, email and password
 export function createUser(userData) {
     return axios
@@ -21,4 +21,10 @@ export function createUser(userData) {
 
 export function addUsersToGroup(users, groupId) {
     return axios.post("/groupuser", { users: users, groupId });
+}
+
+export function getAllUsers() {
+    return axios
+        .get("/users")
+        .then(({ data }) => data.map(user => transformUserResponse(user)));
 }
