@@ -1,5 +1,12 @@
 import React from "react";
-import { Button, Table, Segment, Container, Header } from "semantic-ui-react";
+import {
+    Menu,
+    Icon,
+    Table,
+    Segment,
+    Container,
+    Header
+} from "semantic-ui-react";
 import { QRCode } from "react-qr-svg";
 
 export default function FilePage({
@@ -14,51 +21,24 @@ export default function FilePage({
     return (
         <Segment basic>
             <Segment basic align="middle">
-                <Table compact>
-                    <Table.Body>
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                <Button
-                                    color="blue"
-                                    icon="exchange"
-                                    content="Transfer"
-                                    labelPosition="left"
-                                    size="large"
-                                />
-                            </Table.Cell>
-                            <Table.Cell textAlign="center">
-                                <Button
-                                    color="blue"
-                                    icon="print"
-                                    content="Print QR Code"
-                                    labelPosition="left"
-                                    size="large"
-                                />
-                            </Table.Cell>
-                        </Table.Row>
-
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                <Button
-                                    color="blue"
-                                    icon="edit"
-                                    content="Update Status"
-                                    labelPosition="left"
-                                    size="large"
-                                />
-                            </Table.Cell>
-                            <Table.Cell textAlign="center">
-                                <Button
-                                    color="blue"
-                                    icon="history"
-                                    content="View History"
-                                    labelPosition="left"
-                                    size="large"
-                                />
-                            </Table.Cell>
-                        </Table.Row>
-                    </Table.Body>
-                </Table>
+                <Menu compact inverted>
+                    <Menu.Item name="transfer">
+                        <Icon name="exchange" />
+                        Transfer
+                    </Menu.Item>
+                    <Menu.Item name="printQRCode">
+                        <Icon name="print" />
+                        Print QR Code
+                    </Menu.Item>
+                    <Menu.Item name="updateStatus">
+                        <Icon name="edit" />
+                        Update Status
+                    </Menu.Item>
+                    <Menu.Item name="viewHistory">
+                        <Icon name="history" />
+                        View History
+                    </Menu.Item>
+                </Menu>
             </Segment>
             <Segment>
                 <Table>
@@ -137,14 +117,6 @@ export default function FilePage({
                         value={id.toString()}
                     />
                 </Segment>
-            </Segment>
-            <Segment basic align="middle">
-                <Button
-                    negative
-                    icon="close"
-                    content="Close"
-                    labelPosition="left"
-                />
             </Segment>
         </Segment>
     );
