@@ -19,7 +19,15 @@ export default function AdminMenu({ isAdmin }) {
                     to="/admin/user/create"
                 >
                     <Icon name="add user" />
-                    Add User
+                    Create User
+                </Menu.Item>
+                <Menu.Item
+                    name="createGroup"
+                    as={NavLink}
+                    to="/admin/group/create"
+                >
+                    <Icon name="add square" />
+                    Create Group
                 </Menu.Item>
             </Menu.Menu>
         </Menu.Item>
