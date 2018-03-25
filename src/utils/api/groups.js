@@ -11,9 +11,24 @@ const groupMapping = {
 
 const transformGroupResponse = transformResponseData(groupMapping);
 
-// Request to get all files of a user
+// Request to get all groups
 export function getAllGroups() {
-    return axios.get("/groups").then(({ data }) => {
-        return data.map(item => transformGroupResponse(item));
+    return axios
+        .get("/groups")
+        .then(({ data }) => data.map(item => transformGroupResponse(item)));
+}
+
+// Request to create a new group
+// data should have name and isDepartment
+export function createGroup(groupData) {
+    return axios
+        .post("/groups", groupData)
+        .then(({ data }) => transformGroupResponse(data));
+}
+
+export function updateAuthority(groups, group_id) {
+    return axios.post("/groupgroup", {
+        authorityOver: groups,
+        group_id
     });
 }
