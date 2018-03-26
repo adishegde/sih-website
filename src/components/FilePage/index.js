@@ -9,16 +9,49 @@ import {
 } from "semantic-ui-react";
 import { QRCode } from "react-qr-svg";
 import TransferModal from "containers/FilePage/TransferModal";
+import FileDetail from "./FileDetail";
 
 export default function FilePage({
     createdAt,
-    currentOwnerId,
+    createdBy,
+    currentOwner,
+    updatedAt,
+    timeRecievedCurrentOwner,
     id,
     name,
     priority,
     status,
     customData
 }) {
+    // Guards when data is not present
+    if (!currentOwner) currentOwner = {};
+    if (!createdBy) createdBy = {};
+
+    // Values for normal status
+    let timeRecievedValue = new Date(timeRecievedCurrentOwner).toUTCString();
+    let currentOwnerLabel = "Current Owner";
+    let statusValue = "Normal";
+
+    switch (status) {
+        case "intransit":
+            timeRecievedValue = null;
+            statusValue = "In Transit";
+            currentOwnerLabel = "Destination User";
+            break;
+        case "lost":
+            timeRecievedCurrentOwner = null;
+            statusValue = "Lost";
+            currentOwnerLabel = "File lost by User with ";
+            break;
+        case "legalhold":
+            timeRecievedCurrentOwner = null;
+            statusValue = "Legal Hold";
+            currentOwnerLabel = "Held by User with ";
+            break;
+        default:
+            break;
+    }
+
     return (
         <Segment basic>
             <Segment basic align="middle">
@@ -49,48 +82,43 @@ export default function FilePage({
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                <b>{"File Name"}</b>{" "}
-                            </Table.Cell>
-                            <Table.Cell textAlign="center"> {name} </Table.Cell>
-                        </Table.Row>
-
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                <b>{"File ID"}</b>{" "}
-                            </Table.Cell>
-                            <Table.Cell textAlign="center"> {id} </Table.Cell>
-                        </Table.Row>
-
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                <b>{"Priority Level"}</b>{" "}
-                            </Table.Cell>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                {priority}{" "}
-                            </Table.Cell>
-                        </Table.Row>
-
-                        <Table.Row>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                <b>{"File Status"}</b>{" "}
-                            </Table.Cell>
-                            <Table.Cell textAlign="center">
-                                {" "}
-                                {status}{" "}
-                            </Table.Cell>
-                        </Table.Row>
+                        <FileDetail label="File Name" value={name} />
+                        <FileDetail label="File ID" value={id} />
+                        <FileDetail label="Priority Level" value={priority} />
+                        <FileDetail label="Status" value={statusValue} />
+                        <FileDetail
+                            label={`${currentOwnerLabel} Name`}
+                            value={currentOwner.name}
+                        />
+                        <FileDetail
+                            label={`${currentOwnerLabel} ID`}
+                            value={currentOwner.id}
+                        />
+                        <FileDetail
+                            label="Time Recieved Current Owner"
+                            value={timeRecievedValue}
+                        />
+                        <FileDetail
+                            label="Created By Name"
+                            value={createdBy.name}
+                        />
+                        <FileDetail
+                            label="Created By ID"
+                            value={createdBy.id}
+                        />
+                        <FileDetail
+                            label="Created At"
+                            value={
+                                !createdAt
+                                    ? null
+                                    : new Date(createdAt).toUTCString()
+                            }
+                        />
                         <Table.Row>
                             <Table.Cell colSpan={2}>
                                 <Container text>
                                     <h4>Comments</h4>
-                                    <hr /> <p>{customData}</p>
+                                    <hr /> <p>{customData || "None"}</p>
                                 </Container>
                             </Table.Cell>
                         </Table.Row>
