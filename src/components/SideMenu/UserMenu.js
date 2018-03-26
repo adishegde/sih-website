@@ -2,19 +2,53 @@
  * SideMenu component. It requires the following props:
  *  - onSignOut: Function to be called when SignOut is clicked */
 
-import React from "react";
-import { Menu, Icon } from "semantic-ui-react";
+import React, { Component } from "react";
+import { Menu, Icon, Confirm } from "semantic-ui-react";
 
-export default function UserMenu({ onSignOut }) {
-    return (
-        <Menu.Item>
-            <Menu.Header>User</Menu.Header>
-            <Menu.Menu>
-                <Menu.Item onClick={onSignOut} link>
-                    <Icon name="sign out" />
-                    Sign Out
-                </Menu.Item>
-            </Menu.Menu>
-        </Menu.Item>
-    );
+export default class UserMenu extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isConfirmOpen: false
+        };
+
+        this.closeConfirm = this.closeConfirm.bind(this);
+        this.openConfirm = this.openConfirm.bind(this);
+    }
+
+    render() {
+        const { isConfirmOpen } = this.state;
+        const { onSignOut } = this.props;
+
+        return (
+            <Menu.Item>
+                <Menu.Header>User</Menu.Header>
+                <Menu.Menu>
+                    <Menu.Item link onClick={this.openConfirm}>
+                        <Icon name="sign out" />
+                        Sign Out
+                    </Menu.Item>
+                    <Confirm
+                        onConfirm={onSignOut}
+                        open={isConfirmOpen}
+                        onCancel={this.closeConfirm}
+                        closeOnDimmerClick={true}
+                    />
+                </Menu.Menu>
+            </Menu.Item>
+        );
+    }
+
+    closeConfirm() {
+        this.setState({
+            isConfirmOpen: false
+        });
+    }
+
+    openConfirm() {
+        this.setState({
+            isConfirmOpen: true
+        });
+    }
 }
