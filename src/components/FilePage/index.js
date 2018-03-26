@@ -8,6 +8,7 @@ import {
     Header
 } from "semantic-ui-react";
 import { QRCode } from "react-qr-svg";
+import TransferModal from "containers/FilePage/TransferModal";
 
 export default function FilePage({
     createdAt,
@@ -22,10 +23,7 @@ export default function FilePage({
         <Segment basic>
             <Segment basic align="middle">
                 <Menu compact inverted>
-                    <Menu.Item name="transfer">
-                        <Icon name="exchange" />
-                        Transfer
-                    </Menu.Item>
+                    <TransferModal />
                     <Menu.Item name="printQRCode">
                         <Icon name="print" />
                         Print QR Code

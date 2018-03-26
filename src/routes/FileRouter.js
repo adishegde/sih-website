@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import FilePage from "containers/FilePage";
+import FilePage from "containers/FilePage/index";
 import CreateFile from "containers/CreateFile";
 import FileSearch from "containers/FileSearch";
 
