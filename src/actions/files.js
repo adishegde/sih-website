@@ -8,6 +8,8 @@ export const REQUEST_CREATE_FILE = "REQUEST_CREATE_FILE";
 export const RECIEVE_CREATE_FILE = "RECIEVE_CREATE_FILE";
 export const REQUEST_FILE = "REQUEST_FILE";
 export const RECIEVE_FILE = "RECIEVE_FILE";
+export const REQUEST_TRANSFER_FILE = "REQUEST_TRANSFER_FILE";
+export const RECIEVE_TRANSFER_FILE = "RECIEVE_TRANSFER_FILE";
 
 function recieveAllFiles(files) {
     return {
@@ -45,6 +47,20 @@ function requestFile(id) {
 function recieveFile(file) {
     return {
         type: RECIEVE_FILE,
+        file
+    };
+}
+
+function requestTransferFile(id) {
+    return {
+        type: REQUEST_TRANSFER_FILE,
+        id
+    };
+}
+
+function recieveTransferFile(file) {
+    return {
+        type: RECIEVE_TRANSFER_FILE,
         file
     };
 }
@@ -88,6 +104,21 @@ export function updateFile(id) {
             .getFile(id)
             .then(file => {
                 dispatch(recieveFile(file));
+            })
+            .catch(() => {
+                // ignore errors
+            });
+    };
+}
+
+export function transferFile(id, transferData) {
+    return dispatch => {
+        dispatch(requestTransferFile(id));
+
+        fileApi
+            .transferFile(id, transferData)
+            .then(file => {
+                dispatch(recieveTransferFile(file));
             })
             .catch(() => {
                 // ignore errors

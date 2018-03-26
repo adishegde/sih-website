@@ -36,3 +36,13 @@ export function getFile(id) {
         return transformFileResponse(data);
     });
 }
+
+// Request transfer of file
+export function transferFile(id, transferData) {
+    return axios
+        .patch(`/file/${id}`, {
+            mode: "transfer",
+            ...transferData
+        })
+        .then(({ data }) => transformFileResponse(data));
+}
