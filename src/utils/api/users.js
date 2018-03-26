@@ -15,8 +15,8 @@ const transformUserResponse = transformResponseData(userMapping);
 // data should have name, email and password
 export function createUser(userData) {
     return axios
-        .post("/auth", userData)
-        .then(({ data: { data: user } }) => transformUserResponse(user));
+        .post("/users/create", userData)
+        .then(({ data }) => transformUserResponse(data));
 }
 
 export function addUsersToGroup(users, groupId) {
