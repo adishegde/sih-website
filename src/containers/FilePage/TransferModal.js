@@ -5,8 +5,15 @@ import { transferFile } from "actions/files";
 import { updateUserList } from "actions/users";
 import { updateGroupList } from "actions/groups";
 import TransferModalComponent from "components/FilePage/TransferModal";
-import { getUserList, getGroupList, isFileLoading } from "selectors/index";
+import {
+    getUserList,
+    getFileWithId,
+    getGroupList,
+    isFileLoading,
+    getCurrentUserId
+} from "selectors/index";
 import { getDepartments } from "selectors/groups";
+import { getFileOwner } from "selectors/files";
 
 class TransferModal extends Component {
     componentDidMount() {
@@ -17,13 +24,19 @@ class TransferModal extends Component {
     }
 
     render() {
+        const { currentUser, fileOwner } = this.props;
+
+        // If currentOwner is not file owner then he can't transfer file
+        if (currentUser !== fileOwner) return null;
         return <TransferModalComponent {...this.props} />;
     }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { match: { params } }) {
     return {
         users: getUserList(state),
+        currentUser: getCurrentUserId(state),
+        fileOwner: getFileOwner(getFileWithId(state, params.id)),
         departments: getDepartments(getGroupList(state)),
         isTranfering: isFileLoading(state)
     };
