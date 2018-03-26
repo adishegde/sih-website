@@ -2,12 +2,12 @@
 
 import { connect } from "react-redux";
 import UserMenu from "components/SideMenu/UserMenu";
-import { signOutUser } from "actions/redux-token-auth";
+import { signOut } from "actions/auth";
 
 function mapDispatchToProps(dispatch) {
     return {
         onSignOut: () => {
-            dispatch(signOutUser());
+            dispatch(signOut());
         }
     };
 }

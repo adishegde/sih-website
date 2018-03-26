@@ -6,12 +6,21 @@ import { reduxTokenAuthReducer } from "redux-token-auth";
 import filesReducer from "reducers/files/index";
 import groupsReducer from "reducers/groups/index";
 import usersReducer from "reducers/users/index";
+import { initialState } from "configureStore";
 
 // combineReducers returns root reducer
-export default combineReducers({
+// but it can't clear state on sign out
+const appReducer = combineReducers({
     reduxTokenAuth: reduxTokenAuthReducer,
     error: errorReducer,
     files: filesReducer,
     groups: groupsReducer,
     users: usersReducer
 });
+
+// Clears state on sign out else delegates to appReducer
+export default function rootReducer(state, action) {
+    if (action.type === "redux-token-auth/SIGNOUT_REQUEST_SENT")
+        return initialState;
+    return appReducer(state, action);
+}

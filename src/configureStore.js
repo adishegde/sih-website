@@ -7,6 +7,21 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import rootReducer from "reducers/index";
 
+// Initial state of store.
+export const initialState = {
+    // Required by redux-token-auth package
+    reduxTokenAuth: {
+        currentUser: {
+            isLoading: false,
+            isSignedIn: false,
+            attributes: {
+                id: null,
+                name: null
+            }
+        }
+    }
+};
+
 // Creates redux store
 function configureStore() {
     // List of middlewares to be applied
@@ -16,21 +31,6 @@ function configureStore() {
     if (process.env.NODE_ENV === "development") {
         middlewares.push(createLogger());
     }
-
-    // Initial state of store.
-    const initialState = {
-        // Required by redux-token-auth package
-        reduxTokenAuth: {
-            currentUser: {
-                isLoading: false,
-                isSignedIn: false,
-                attributes: {
-                    id: null,
-                    name: null
-                }
-            }
-        }
-    };
 
     // Return the store
     return createStore(
