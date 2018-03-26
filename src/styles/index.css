@@ -11,3 +11,7 @@ body {
 #root {
     height: 100%;
 }
+
+:global(.dimmed.dimmable > .ui.modals.dimmer.visible) {
+    display: flex !important;
+}
