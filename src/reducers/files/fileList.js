@@ -4,7 +4,8 @@ import {
     RECIEVE_ALL_FILES,
     RECIEVE_CREATE_FILE,
     RECIEVE_FILE,
-    RECIEVE_TRANSFER_FILE
+    RECIEVE_TRANSFER_FILE,
+    RECIEVE_UPDATE_FILE_STATUS
 } from "actions/files";
 
 export default function fileListReducer(state = {}, action) {
@@ -17,6 +18,7 @@ export default function fileListReducer(state = {}, action) {
 
         case RECIEVE_CREATE_FILE:
         case RECIEVE_TRANSFER_FILE:
+        case RECIEVE_UPDATE_FILE_STATUS:
         case RECIEVE_FILE:
             return { ...state, [action.file.id]: action.file };
 

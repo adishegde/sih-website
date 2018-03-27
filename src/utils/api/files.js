@@ -65,3 +65,12 @@ export function getFileHistory(id) {
             data.map(history => transformHistoryResponse(history))
         );
 }
+
+export function updateFile(id, file) {
+    return axios
+        .patch(`/file/${id}`, {
+            mode: "update",
+            ...file
+        })
+        .then(({ data }) => transformFileResponse(data));
+}

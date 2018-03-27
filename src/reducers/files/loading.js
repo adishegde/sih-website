@@ -12,7 +12,9 @@ import {
     REQUEST_TRANSFER_FILE,
     RECIEVE_TRANSFER_FILE,
     REQUEST_FILE_HISTORY,
-    RECIEVE_FILE_HISTORY
+    RECIEVE_FILE_HISTORY,
+    REQUEST_UPDATE_FILE_STATUS,
+    RECIEVE_UPDATE_FILE_STATUS
 } from "actions/files";
 
 export default function loadingReducer(state = false, action) {
@@ -21,6 +23,7 @@ export default function loadingReducer(state = false, action) {
         case REQUEST_ALL_FILES:
         case REQUEST_FILE:
         case REQUEST_FILE_HISTORY:
+        case REQUEST_UPDATE_FILE_STATUS:
         case REQUEST_TRANSFER_FILE:
             return true;
 
@@ -29,6 +32,7 @@ export default function loadingReducer(state = false, action) {
         case RECIEVE_FILE_HISTORY:
         case RECIEVE_FILE:
         case RECIEVE_TRANSFER_FILE:
+        case RECIEVE_UPDATE_FILE_STATUS:
             return false;
 
         default:
