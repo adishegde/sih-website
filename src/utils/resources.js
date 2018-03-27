@@ -9,3 +9,18 @@ export const WebsiteName = process.env.REACT_APP_WEBSITE_NAME;
 export const ApiServer = "/api";
 
 export const AuthUrl = `${ApiServer}/auth`;
+
+export function statusToDisplay(status) {
+    switch (status) {
+        case "normal":
+            return "Normal";
+        case "intransit":
+            return "In Transit";
+        case "legalhold":
+            return "legalhold";
+        case "lost":
+            return "Lost";
+        default:
+            return "Unknown";
+    }
+}
