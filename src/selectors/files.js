@@ -23,6 +23,10 @@ export function getFilesByName(files, name) {
 
 export function getFileOwner(file) {
     if (!file) return null;
-    if (!file.currentOwner) return null;
-    return file.currentOwner.id;
+    return file.currentOwnerId;
+}
+
+export function getFileStatus(file) {
+    if (!file) return null;
+    return file.status;
 }
