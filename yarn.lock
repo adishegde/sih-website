@@ -5565,6 +5565,10 @@ qr.js@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
 
+qrcode-js@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/qrcode-js/-/qrcode-js-0.0.2.tgz#dfe7f93488fd56f4735cf24075d63f182c7f8534"
+
 qs@6.5.1, qs@~6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
@@ -5675,10 +5679,6 @@ react-dom@^16.2.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-react-easy-print@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/react-easy-print/-/react-easy-print-0.5.4.tgz#ca674b3b70b56181d82a987d0b54f712a27eb697"
 
 react-error-overlay@^4.0.0:
   version "4.0.0"

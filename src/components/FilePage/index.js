@@ -13,6 +13,7 @@ import FileDetail from "./FileDetail";
 import { statusToDisplay } from "utils/resources";
 import HistoryModal from "containers/FilePage/HistoryModal";
 import { qrcodeString } from "utils/resources";
+import QRGenerator from "qrcode-js";
 
 export default function FilePage({
     createdAt,
@@ -56,9 +57,15 @@ export default function FilePage({
             <Segment basic align="middle">
                 <Menu compact inverted>
                     <TransferModal />
-                    <Menu.Item name="printQRCode">
+                    <Menu.Item
+                        as="a"
+                        href={`data:image/png;${QRGenerator.toDataURL(
+                            qrcodeString(id)
+                        )}`}
+                        download={`QRCode_${name}_${id}`}
+                    >
                         <Icon name="print" />
-                        Print QR Code
+                        Download QR Code
                     </Menu.Item>
                     <Menu.Item name="updateStatus">
                         <Icon name="edit" />

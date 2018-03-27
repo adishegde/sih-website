@@ -5,9 +5,9 @@
     "proxy": "http://localhost:9000/",
     "dependencies": {
         "axios": "^0.18.0",
+        "qrcode-js": "^0.0.2",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "react-easy-print": "^0.5.4",
         "react-qr-svg": "^2.1.0",
         "react-redux": "^5.0.7",
         "react-router-dom": "^4.2.2",
