@@ -67,7 +67,6 @@ class Confirmation extends Component {
                     primary
                 />
                 <Confirm
-                    style={{ marginLeft: "60vh", marginTop: "35vh" }}
                     open={this.state.open}
                     content="Are You sure?"
                     onCancel={this.handleCancel}

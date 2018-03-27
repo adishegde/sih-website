@@ -25,7 +25,7 @@ export default function FileTable({ files, tableName }) {
                 <Table.Row>
                     <Table.HeaderCell
                         textAlign="center"
-                        colSpan="5"
+                        colSpan="6"
                         style={{ fontSize: "16px" }}
                     >
                         {tableName}
@@ -33,10 +33,11 @@ export default function FileTable({ files, tableName }) {
                 </Table.Row>
                 <Table.Row>
                     <Table.HeaderCell>Id</Table.HeaderCell>
-                    <Table.HeaderCell>Created</Table.HeaderCell>
                     <Table.HeaderCell>Name</Table.HeaderCell>
                     <Table.HeaderCell>Priority</Table.HeaderCell>
-                    <Table.HeaderCell>Recieved</Table.HeaderCell>
+                    <Table.HeaderCell>Status</Table.HeaderCell>
+                    <Table.HeaderCell>Created</Table.HeaderCell>
+                    <Table.HeaderCell>Updated</Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
 

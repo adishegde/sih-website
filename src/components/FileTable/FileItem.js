@@ -1,11 +1,13 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
+import { statusToDisplay } from "utils/resources";
 
 export default function FileTable({
     id,
     createdAt,
     name,
-    timeRecievedCurrentOwner,
+    status,
+    updatedAt,
     priority,
     onClick
 }) {
@@ -17,12 +19,11 @@ export default function FileTable({
             onClick={onClick}
         >
             <Table.Cell>{id}</Table.Cell>
-            <Table.Cell>{new Date(createdAt).toDateString()}</Table.Cell>
             <Table.Cell>{name}</Table.Cell>
             <Table.Cell>{priority}</Table.Cell>
-            <Table.Cell>
-                {new Date(timeRecievedCurrentOwner).toDateString()}
-            </Table.Cell>
+            <Table.Cell>{statusToDisplay(status)}</Table.Cell>
+            <Table.Cell>{new Date(createdAt).toDateString()}</Table.Cell>
+            <Table.Cell>{new Date(updatedAt).toDateString()}</Table.Cell>
         </Table.Row>
     );
 }
