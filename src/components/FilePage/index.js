@@ -12,6 +12,7 @@ import TransferModal from "containers/FilePage/TransferModal";
 import FileDetail from "./FileDetail";
 import { statusToDisplay } from "utils/resources";
 import HistoryModal from "containers/FilePage/HistoryModal";
+import { qrcodeString } from "utils/resources";
 
 export default function FilePage({
     createdAt,
@@ -138,7 +139,7 @@ export default function FilePage({
                         fgColor="#000000"
                         level="Q"
                         style={{ width: 256 }}
-                        value={id.toString()}
+                        value={qrcodeString(id)}
                     />
                 </Segment>
             </Segment>

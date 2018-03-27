@@ -24,3 +24,7 @@ export function statusToDisplay(status) {
             return "Unknown";
     }
 }
+
+export function qrcodeString(fileId) {
+    return btoa(`FITS:${fileId}`);
+}
