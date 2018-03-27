@@ -9,6 +9,7 @@ import {
 } from "semantic-ui-react";
 import { QRCode } from "react-qr-svg";
 import TransferModal from "containers/FilePage/TransferModal";
+import StatusUpdateModal from "containers/FilePage/StatusUpdateModal";
 import FileDetail from "./FileDetail";
 import { statusToDisplay } from "utils/resources";
 import HistoryModal from "containers/FilePage/HistoryModal";
@@ -67,10 +68,7 @@ export default function FilePage({
                         <Icon name="print" />
                         Download QR Code
                     </Menu.Item>
-                    <Menu.Item name="updateStatus">
-                        <Icon name="edit" />
-                        Update Status
-                    </Menu.Item>
+                    <StatusUpdateModal />
                     <HistoryModal />
                 </Menu>
             </Segment>
