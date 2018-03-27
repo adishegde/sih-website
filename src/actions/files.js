@@ -10,6 +10,8 @@ export const REQUEST_FILE = "REQUEST_FILE";
 export const RECIEVE_FILE = "RECIEVE_FILE";
 export const REQUEST_TRANSFER_FILE = "REQUEST_TRANSFER_FILE";
 export const RECIEVE_TRANSFER_FILE = "RECIEVE_TRANSFER_FILE";
+export const REQUEST_FILE_HISTORY = "REQUEST_FILE_HISTORY";
+export const RECIEVE_FILE_HISTORY = "RECIEVE_FILE_HISTORY";
 
 function recieveAllFiles(files) {
     return {
@@ -62,6 +64,21 @@ function recieveTransferFile(file) {
     return {
         type: RECIEVE_TRANSFER_FILE,
         file
+    };
+}
+
+function requestFileHistory(id) {
+    return {
+        type: REQUEST_FILE_HISTORY,
+        id
+    };
+}
+
+function recieveFileHistory(id, historyList) {
+    return {
+        type: RECIEVE_FILE_HISTORY,
+        id,
+        historyList
     };
 }
 
@@ -119,6 +136,21 @@ export function transferFile(id, transferData) {
             .transferFile(id, transferData)
             .then(file => {
                 dispatch(recieveTransferFile(file));
+            })
+            .catch(() => {
+                // ignore errors
+            });
+    };
+}
+
+export function updateFileHistory(id) {
+    return dispatch => {
+        dispatch(requestFileHistory());
+
+        fileApi
+            .getFileHistory(id)
+            .then(historyList => {
+                dispatch(recieveFileHistory(id, historyList));
             })
             .catch(() => {
                 // ignore errors

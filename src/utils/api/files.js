@@ -14,7 +14,17 @@ const fileMapping = {
     currentOwnerId: "currentOwner_id"
 };
 
+const historyMapping = {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+    changedBy: "users",
+    statusFrom: "status_from",
+    statusTo: "status_to",
+    changeTime: "change_time"
+};
+
 const transformFileResponse = transformResponseData(fileMapping);
+const transformHistoryResponse = transformResponseData(historyMapping);
 
 // Request to get all files of a user
 export function getAllFiles() {
@@ -45,4 +55,13 @@ export function transferFile(id, transferData) {
             ...transferData
         })
         .then(({ data }) => transformFileResponse(data));
+}
+
+// Request file history
+export function getFileHistory(id) {
+    return axios
+        .get(`/file/${id}/history`)
+        .then(({ data }) =>
+            data.map(history => transformHistoryResponse(history))
+        );
 }

@@ -60,3 +60,7 @@ export function isUserLoading(state) {
 export function getUserList(state) {
     return Object.values(state.users.list);
 }
+
+export function getFileHistory(state, id) {
+    return state.files.history[id];
+}
