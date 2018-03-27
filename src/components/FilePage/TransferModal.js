@@ -31,7 +31,7 @@ export default class TransferModal extends Component {
     }
 
     render() {
-        const { users, departments, isTranfering } = this.props;
+        const { users, departments, onModalMount } = this.props;
         const {
             transferByUser,
             toTransferGroup,
@@ -56,6 +56,7 @@ export default class TransferModal extends Component {
                 <Modal
                     open={isModalOpen}
                     closeIcon
+                    onMount={onModalMount}
                     onClose={this.closeModal}
                     closeOnEscape={false}
                     closeOnDimmerClick={false}
@@ -87,7 +88,6 @@ export default class TransferModal extends Component {
                         <Segment align="middle" basic>
                             <Button
                                 primary
-                                loading={isTranfering}
                                 onClick={this.onSubmit}
                                 content="Confirm"
                             />

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { transferFile } from "actions/files";
@@ -9,27 +9,17 @@ import {
     getUserList,
     getFileWithId,
     getGroupList,
-    isFileLoading,
     getCurrentUserId
 } from "selectors/index";
 import { getDepartments } from "selectors/groups";
 import { getFileOwner } from "selectors/files";
 
-class TransferModal extends Component {
-    componentDidMount() {
-        const { fetchAllGroups, fetchAllUsers } = this.props;
+function TransferModal(props) {
+    const { currentUser, fileOwner } = props;
 
-        fetchAllGroups();
-        fetchAllUsers();
-    }
-
-    render() {
-        const { currentUser, fileOwner } = this.props;
-
-        // If currentOwner is not file owner then he can't transfer file
-        if (currentUser !== fileOwner) return null;
-        return <TransferModalComponent {...this.props} />;
-    }
+    // If currentOwner is not file owner then he can't transfer file
+    if (currentUser !== fileOwner) return null;
+    return <TransferModalComponent {...props} />;
 }
 
 function mapStateToProps(state, { match: { params } }) {
@@ -37,8 +27,7 @@ function mapStateToProps(state, { match: { params } }) {
         users: getUserList(state),
         currentUser: getCurrentUserId(state),
         fileOwner: getFileOwner(getFileWithId(state, params.id)),
-        departments: getDepartments(getGroupList(state)),
-        isTranfering: isFileLoading(state)
+        departments: getDepartments(getGroupList(state))
     };
 }
 
@@ -47,11 +36,9 @@ function mapDispatchToProps(dispatch, { match: { params } }) {
         onTransfer: transferData => {
             dispatch(transferFile(params.id, transferData));
         },
-        fetchAllGroups: () => {
-            dispatch(updateGroupList());
-        },
-        fetchAllUsers: () => {
+        onModalMount: () => {
             dispatch(updateUserList());
+            dispatch(updateGroupList());
         }
     };
 }
