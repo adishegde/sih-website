@@ -10,6 +10,8 @@ import {
 import { QRCode } from "react-qr-svg";
 import TransferModal from "containers/FilePage/TransferModal";
 import FileDetail from "./FileDetail";
+import { statusToDisplay } from "utils/resources";
+import HistoryModal from "containers/FilePage/HistoryModal";
 
 export default function FilePage({
     createdAt,
@@ -30,22 +32,18 @@ export default function FilePage({
     // Values for normal status
     let timeRecievedValue = new Date(timeRecievedCurrentOwner).toUTCString();
     let currentOwnerLabel = "Current Owner";
-    let statusValue = "Normal";
 
     switch (status) {
         case "intransit":
             timeRecievedValue = null;
-            statusValue = "In Transit";
             currentOwnerLabel = "Destination User";
             break;
         case "lost":
             timeRecievedCurrentOwner = null;
-            statusValue = "Lost";
             currentOwnerLabel = "File lost by User with ";
             break;
         case "legalhold":
             timeRecievedCurrentOwner = null;
-            statusValue = "Legal Hold";
             currentOwnerLabel = "Held by User with ";
             break;
         default:
@@ -65,10 +63,7 @@ export default function FilePage({
                         <Icon name="edit" />
                         Update Status
                     </Menu.Item>
-                    <Menu.Item name="viewHistory">
-                        <Icon name="history" />
-                        View History
-                    </Menu.Item>
+                    <HistoryModal />
                 </Menu>
             </Segment>
             <Segment>
@@ -85,7 +80,10 @@ export default function FilePage({
                         <FileDetail label="File Name" value={name} />
                         <FileDetail label="File ID" value={id} />
                         <FileDetail label="Priority Level" value={priority} />
-                        <FileDetail label="Status" value={statusValue} />
+                        <FileDetail
+                            label="Status"
+                            value={statusToDisplay(status)}
+                        />
                         <FileDetail
                             label={`${currentOwnerLabel} Name`}
                             value={currentOwner.name}
