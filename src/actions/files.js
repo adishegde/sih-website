@@ -163,7 +163,7 @@ export function transferFile(id, transferData) {
 
 export function updateFileHistory(id) {
     return dispatch => {
-        dispatch(requestFileHistory());
+        dispatch(requestFileHistory(id));
 
         fileApi
             .getFileHistory(id)
