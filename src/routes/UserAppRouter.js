@@ -11,6 +11,7 @@ import SideMenu from "components/SideMenu/index";
 import FileRouter from "routes/FileRouter";
 import UserDashboard from "containers/Dashboard";
 import AdminRouter from "routes/AdminRouter";
+import UserRouter from "routes/UserRouter";
 
 function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
     if (isAuthenticating) {
@@ -36,6 +37,7 @@ function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
                     <Route path="/" exact component={UserDashboard} />
                     <Route path="/file" component={FileRouter} />
                     <Route path="/admin" component={AdminRouter} />
+                    <Route path="/user" component={UserRouter} />
                 </div>
             </div>
         );
