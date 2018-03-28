@@ -64,3 +64,11 @@ export function getUserList(state) {
 export function getFileHistory(state, id) {
     return state.files.history[id];
 }
+
+export function getReportOfUserWithId(state, id) {
+    return state.users.report[id];
+}
+
+export function getUserWithId(state, id) {
+    return state.users.list[id];
+}

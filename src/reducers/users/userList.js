@@ -1,6 +1,10 @@
 /* This file exports the reducer that handles the state of list of users */
 
-import { RECIEVE_ALL_USERS, RECIEVE_CREATE_USER } from "actions/users";
+import {
+    RECIEVE_ALL_USERS,
+    RECIEVE_CREATE_USER,
+    RECIEVE_USER
+} from "actions/users";
 
 export default function userListReducer(state = {}, action) {
     switch (action.type) {
@@ -12,6 +16,9 @@ export default function userListReducer(state = {}, action) {
 
         case RECIEVE_CREATE_USER:
             return { ...state, [action.user.id]: action.user };
+
+        case RECIEVE_USER:
+            return { ...state, [action.id]: action.user };
 
         default:
             return state;

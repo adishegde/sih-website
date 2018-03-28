@@ -9,7 +9,17 @@ const userMapping = {
     updatedAt: "updated_at"
 };
 
+const reportMapping = {
+    totalFilesTransferred: "TotalFilesTransferred",
+    filesTransferred: "FilesTransferred",
+    totalFilesLost: "TotalFilesLost",
+    filesLost: "FilesLost",
+    totalFilesLegalHold: "TotalFilesLegalHold",
+    filesLegalHold: "FilesLegalHold"
+};
+
 const transformUserResponse = transformResponseData(userMapping);
+const transformReportResponse = transformResponseData(reportMapping);
 
 // Request to create a new user
 // data should have name, email and password
@@ -27,4 +37,16 @@ export function getAllUsers() {
     return axios
         .get("/users")
         .then(({ data }) => data.map(user => transformUserResponse(user)));
+}
+
+export function getUserReport(id) {
+    return axios
+        .get(`/users/${id}/report`)
+        .then(({ data }) => transformReportResponse(data));
+}
+
+export function getUser(id) {
+    return axios
+        .get(`/users/${id}`)
+        .then(({ data }) => transformUserResponse(data));
 }
