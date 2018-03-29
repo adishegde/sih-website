@@ -22,6 +22,10 @@ export default function SideMenu({ isAdmin }) {
             </Menu.Item>
             <FileMenu />
             <AdminMenu />
+            <Menu.Item>
+                <Icon name="industry" />
+                <Link to="/group/authority">Reports</Link>
+            </Menu.Item>
         </Menu>
     );
 }
