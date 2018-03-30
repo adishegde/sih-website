@@ -9,6 +9,8 @@ export const RECIEVE_CREATE_GROUP = "RECIEVE_CREATE_GROUP";
 export const REQUEST_CREATE_GROUP = "REQUEST_CREATE_GROUP";
 export const RECIEVE_GROUP_MEMBERS = "RECIEVE_GROUP_MEMBERS";
 export const REQUEST_GROUP_MEMBERS = "REQUEST_GROUP_MEMBERS";
+export const RECIEVE_CREATE_SECTION = "RECIEVE_CREATE_SECTION";
+export const REQUEST_CREATE_SECTION = "REQUEST_CREATE_SECTION";
 
 function recieveAllGroups(groups) {
     return {
@@ -51,14 +53,29 @@ function recieveGroupMembers(id, users) {
     };
 }
 
+function recieveCreateSection(section, sectionHead) {
+    return {
+        type: RECIEVE_CREATE_SECTION,
+        section,
+        sectionHead
+    };
+}
+
+function requestCreateSection() {
+    return {
+        type: REQUEST_CREATE_SECTION
+    };
+}
+
 export function updateGroupList() {
     return dispatch => {
         dispatch(requestAllGroups());
 
-        groupApi
+        return groupApi
             .getAllGroups()
             .then(groups => {
                 dispatch(recieveAllGroups(groups));
+                return groups;
             })
             .catch(error => {
                 //ignore
@@ -66,7 +83,7 @@ export function updateGroupList() {
     };
 }
 
-export function createGroup(data, history) {
+export function createGroup(data) {
     return async dispatch => {
         dispatch(requestCreateGroup());
         const { name, users, authorityOver, isDepartment } = data;
@@ -77,22 +94,24 @@ export function createGroup(data, history) {
 
             const requests = [];
 
-            if (authorityOver.length !== 0) {
+            if (authorityOver && authorityOver.length !== 0) {
                 requests.push(
                     groupApi.updateAuthority(authorityOver, group.id)
                 );
             }
 
-            if (users.length !== 0) {
+            if (users && users.length !== 0) {
                 requests.push(userApi.addUsersToGroup(users, group.id));
             }
 
             await Promise.all(requests);
 
             dispatch(recieveCreateGroup(group));
-            history.push(`/admin/group/${group.id}`);
+
+            return group;
         } catch (error) {
             // ignore
+            console.log(error);
         }
     };
 }
@@ -101,13 +120,39 @@ export function updateGroupMembers(id) {
     return dispatch => {
         dispatch(requestGroupMembers(id));
 
-        userApi
+        return userApi
             .getGroupMembers(id)
             .then(users => {
                 dispatch(recieveGroupMembers(id, users));
+                return users;
             })
             .catch(() => {
                 // ignore errors
             });
+    };
+}
+
+export function createSection({ users, name, sectionHeads }, history) {
+    return async dispatch => {
+        dispatch(requestCreateSection());
+
+        try {
+            const section = await dispatch(
+                createGroup({ name, users, isDepartment: true })
+            );
+            const sectionHead = await dispatch(
+                createGroup({
+                    name: `${name} Head`,
+                    users: sectionHeads,
+                    authorityOver: [section.id],
+                    isDepartment: false
+                })
+            );
+
+            dispatch(recieveCreateSection(section, sectionHead));
+            history.push(`/sections/${section.id}`);
+        } catch (err) {
+            // ignore errors
+        }
     };
 }
