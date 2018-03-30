@@ -40,7 +40,9 @@ export default class UpdateStatusModal extends Component {
                     <Modal.Header>Recieve File</Modal.Header>
                     <Modal.Content>
                         <Header as="h4">Scan QRCode</Header>
-                        <QRCodeReader onScan={this.onQRCodeScan} />
+                        <Segment align="center">
+                            <QRCodeReader onScan={this.onQRCodeScan} />
+                        </Segment>
                     </Modal.Content>
                 </Modal>
             </Menu.Item>
