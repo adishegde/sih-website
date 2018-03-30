@@ -15,8 +15,7 @@ class AddUser extends Component {
             email: "",
             error: false,
             groups: [],
-            password: "",
-            deptValue: null
+            password: ""
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -24,24 +23,13 @@ class AddUser extends Component {
     }
 
     render() {
-        let { name, email, password, deptValue, groups, error } = this.state;
-        let {
-            groups: groupOptions,
-            departments,
-            isCreating,
-            isFetchingGroups
-        } = this.props;
+        let { name, email, password, groups, error } = this.state;
+        let { groups: groupOptions, isCreating, isFetchingGroups } = this.props;
 
         groupOptions = groupOptions.map(group => ({
             key: group.id,
             text: group.name,
             value: group.id
-        }));
-
-        departments = departments.map(department => ({
-            key: department.id,
-            text: department.name,
-            value: department.id
         }));
 
         return (
@@ -79,25 +67,12 @@ class AddUser extends Component {
                         selection
                         search
                         scrolling
-                        label="Groups"
-                        placeholder="Groups"
+                        label="Sections"
+                        placeholder="Sections"
                         options={groupOptions}
                         onChange={this.onInputChange}
                         value={groups}
                         name="groups"
-                        loading={isFetchingGroups}
-                    />
-                    <Form.Select
-                        fluid
-                        search
-                        scrolling
-                        selection
-                        label="Department"
-                        placeholder="Department"
-                        options={departments}
-                        onChange={this.onInputChange}
-                        value={deptValue}
-                        name="deptValue"
                         loading={isFetchingGroups}
                     />
                     <div align="middle">
@@ -133,7 +108,7 @@ class AddUser extends Component {
     }
 
     onSubmit() {
-        const { name, email, deptValue, groups, password } = this.state;
+        const { name, email, groups, password } = this.state;
 
         if (name === "" || !validateEmail(email) || password.length < 8) {
             //error
@@ -146,7 +121,6 @@ class AddUser extends Component {
                 name,
                 email,
                 groups,
-                department: deptValue,
                 password
             });
         }

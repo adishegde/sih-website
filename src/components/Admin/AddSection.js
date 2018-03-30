@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import { Form, Message, Segment, Checkbox } from "semantic-ui-react";
+import { Form, Message, Segment } from "semantic-ui-react";
 
-class GroupAdd extends Component {
+class AddSection extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             name: "",
             error: false,
-            authorityGroups: [],
-            users: [],
-            isDeptValue: false
+            sectionHeads: [],
+            users: []
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -18,21 +17,9 @@ class GroupAdd extends Component {
     }
 
     render() {
-        let { name, authorityGroups, users, isDeptValue, error } = this.state;
+        let { name, sectionHeads, users, error } = this.state;
 
-        let {
-            groups,
-            users: userOptions,
-            isCreating,
-            isFetchingGroups,
-            isFetchingUsers
-        } = this.props;
-
-        groups = groups.map(group => ({
-            key: group.id,
-            text: group.name,
-            value: group.id
-        }));
+        let { users: userOptions, isCreating, isFetchingUsers } = this.props;
 
         userOptions = userOptions.map(user => ({
             key: user.id,
@@ -46,8 +33,8 @@ class GroupAdd extends Component {
                 <Form error={error}>
                     <Form.Input
                         fluid
-                        label="Name"
-                        placeholder="Name"
+                        label="Name of Section"
+                        placeholder="Name of Section"
                         onChange={this.onInputChange}
                         value={name}
                         name="name"
@@ -72,22 +59,14 @@ class GroupAdd extends Component {
                         selection
                         search
                         scrolling
-                        label="Authority over"
-                        options={groups}
+                        label="Section Heads"
+                        placeholder="Section Heads"
+                        options={userOptions}
                         onChange={this.onInputChange}
-                        value={authorityGroups}
-                        loading={isFetchingGroups}
-                        name="authorityGroups"
+                        value={sectionHeads}
+                        loading={isFetchingUsers}
+                        name="sectionHeads"
                     />
-                    <Form.Field>
-                        <Checkbox
-                            toggle
-                            checked={isDeptValue}
-                            label="Department"
-                            onChange={this.onInputChange}
-                            name="isDeptValue"
-                        />
-                    </Form.Field>
                     <div align="middle">
                         <Form.Button
                             icon="checkmark"
@@ -101,7 +80,7 @@ class GroupAdd extends Component {
                     <Message
                         error
                         header="Action Forbidden"
-                        content="Name cannot be empty"
+                        content="Please ensure that Name is not empty."
                     />
                 </Form>
             </Segment>
@@ -115,7 +94,7 @@ class GroupAdd extends Component {
     }
 
     onSubmit() {
-        const { name, users, authorityGroups, isDeptValue } = this.state;
+        const { name, users, sectionHeads } = this.state;
 
         if (name === "") {
             this.setState({
@@ -130,10 +109,10 @@ class GroupAdd extends Component {
             onCreateGroup({
                 name,
                 users,
-                authorityOver: authorityGroups,
-                isDepartment: isDeptValue
+                sectionHeads
             });
         }
     }
 }
-export default GroupAdd;
+
+export default AddSection;
