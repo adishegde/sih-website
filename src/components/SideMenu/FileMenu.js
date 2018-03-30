@@ -4,6 +4,7 @@
 import React from "react";
 import { Menu, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import RecieveModal from "containers/FilePage/RecieveModal";
 
 export default function FileMenu() {
     return (
@@ -18,6 +19,7 @@ export default function FileMenu() {
                     <Icon name="file text" />
                     All Files
                 </Menu.Item>
+                <RecieveModal />
             </Menu.Menu>
         </Menu.Item>
     );
