@@ -22,7 +22,7 @@ export default function GroupTable({ groups, tableName, onClickItem }) {
     ));
 
     return (
-        <Table singleLine>
+        <Table singleLine columns={3} textAlign="center">
             <Table.Header>
                 <Table.Row>
                     <Table.HeaderCell
