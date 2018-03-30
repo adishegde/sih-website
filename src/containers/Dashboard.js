@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DashboardComponent from "components/Dashboard";
 import { connect } from "react-redux";
 import { updateFileList } from "actions/files";
-import { getFileList } from "selectors/index";
+import { getFileList, getCurrentUserId } from "selectors/index";
 import {
     getFilesWithPriority,
     getFilesSortedByTimeRecieved
@@ -28,15 +28,23 @@ class Dashboard extends Component {
 function mapStateToProps(state) {
     const files = getFileList(state);
 
-    const highPriority = getFilesSortedByTimeRecieved(
+    let highPriority = getFilesSortedByTimeRecieved(
         getFilesWithPriority(files, "high")
     ).slice(0, NUM_ITEMS);
-    const mediumPriority = getFilesSortedByTimeRecieved(
+    let mediumPriority = getFilesSortedByTimeRecieved(
         getFilesWithPriority(files, "medium")
     ).slice(0, NUM_ITEMS);
-    const lowPriority = getFilesSortedByTimeRecieved(
+    let lowPriority = getFilesSortedByTimeRecieved(
         getFilesWithPriority(files, "low")
     ).slice(0, NUM_ITEMS);
+
+    const userId = getCurrentUserId(state);
+
+    highPriority = highPriority.filter(file => file.currentOwnerId === userId);
+    mediumPriority = mediumPriority.filter(
+        file => file.currentOwnerId === userId
+    );
+    lowPriority = lowPriority.filter(file => file.currentOwnerId === userId);
 
     return {
         highPriority,
