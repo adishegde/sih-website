@@ -84,3 +84,14 @@ export function getGroupWithIds(state, ids) {
     if (!ids) return [];
     return ids.map(id => list[id]);
 }
+
+export function getUserWithIds(state, ids) {
+    const { users: { list } } = state;
+
+    if (!ids) return [];
+    return ids.map(id => list[id]);
+}
+
+export function getGroupMembers(state, id) {
+    return state.groups.members[id];
+}

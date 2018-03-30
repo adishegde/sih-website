@@ -7,6 +7,8 @@ export const RECIEVE_ALL_GROUPS = "RECIEVE_ALL_GROUPS";
 export const REQUEST_ALL_GROUPS = "REQUEST_ALL_GROUPS";
 export const RECIEVE_CREATE_GROUP = "RECIEVE_CREATE_GROUP";
 export const REQUEST_CREATE_GROUP = "REQUEST_CREATE_GROUP";
+export const RECIEVE_GROUP_MEMBERS = "RECIEVE_GROUP_MEMBERS";
+export const REQUEST_GROUP_MEMBERS = "REQUEST_GROUP_MEMBERS";
 
 function recieveAllGroups(groups) {
     return {
@@ -28,9 +30,24 @@ function recieveCreateGroup(group) {
     };
 }
 
-function requestCreateGroup(group) {
+function requestCreateGroup() {
     return {
         type: REQUEST_CREATE_GROUP
+    };
+}
+
+function requestGroupMembers(id) {
+    return {
+        type: REQUEST_GROUP_MEMBERS,
+        id
+    };
+}
+
+function recieveGroupMembers(id, users) {
+    return {
+        type: RECIEVE_GROUP_MEMBERS,
+        id,
+        users
     };
 }
 
@@ -77,5 +94,20 @@ export function createGroup(data, history) {
         } catch (error) {
             // ignore
         }
+    };
+}
+
+export function updateGroupMembers(id) {
+    return dispatch => {
+        dispatch(requestGroupMembers(id));
+
+        userApi
+            .getGroupMembers(id)
+            .then(users => {
+                dispatch(recieveGroupMembers(id, users));
+            })
+            .catch(() => {
+                // ignore errors
+            });
     };
 }

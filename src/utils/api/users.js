@@ -50,3 +50,9 @@ export function getUser(id) {
         .get(`/users/${id}`)
         .then(({ data }) => transformUserResponse(data));
 }
+
+export function getGroupMembers(id) {
+    return axios
+        .get(`/groups/${id}/users`)
+        .then(({ data }) => data.map(user => transformUserResponse(user)));
+}
