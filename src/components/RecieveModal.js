@@ -1,13 +1,5 @@
 import React, { Component } from "react";
-import {
-    Modal,
-    Menu,
-    Header,
-    Icon,
-    Button,
-    Select,
-    Segment
-} from "semantic-ui-react";
+import { Modal, Menu, Header, Icon, Segment } from "semantic-ui-react";
 import QRCodeReader from "components/QRCodeReader";
 
 export default class UpdateStatusModal extends Component {
