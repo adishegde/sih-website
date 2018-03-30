@@ -3,8 +3,10 @@
 import { combineReducers } from "redux";
 import loadingReducer from "./loading";
 import groupListReducer from "./groupList";
+import authorityReducer from "./authority";
 
 export default combineReducers({
     loading: loadingReducer,
-    list: groupListReducer
+    list: groupListReducer,
+    authority: authorityReducer
 });

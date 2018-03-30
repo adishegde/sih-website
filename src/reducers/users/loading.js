@@ -10,7 +10,9 @@ import {
     REQUEST_USER_REPORT,
     RECIEVE_USER_REPORT,
     RECIEVE_USER,
-    REQUEST_USER
+    REQUEST_USER,
+    REQUEST_AUTHORITY_OVER_GROUPS,
+    RECIEVE_AUTHORITY_OVER_GROUPS
 } from "actions/users";
 
 export default function loadingReducer(state = false, action) {
@@ -19,12 +21,14 @@ export default function loadingReducer(state = false, action) {
         case REQUEST_ALL_USERS:
         case REQUEST_USER_REPORT:
         case REQUEST_USER:
+        case REQUEST_AUTHORITY_OVER_GROUPS:
             return true;
 
         case RECIEVE_CREATE_USER:
         case RECIEVE_ALL_USERS:
         case RECIEVE_USER_REPORT:
         case RECIEVE_USER:
+        case RECIEVE_AUTHORITY_OVER_GROUPS:
             return false;
 
         default:

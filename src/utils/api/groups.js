@@ -32,3 +32,9 @@ export function updateAuthority(groups, group_id) {
         group_id
     });
 }
+
+export function getAuthorityOverGroups(id) {
+    return axios
+        .get(`/users/${id}/authorityover`)
+        .then(({ data }) => data.map(group => transformGroupResponse(group)));
+}

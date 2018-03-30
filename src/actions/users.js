@@ -1,6 +1,8 @@
 /* This file exports actions related to groups */
 
 import * as userApi from "utils/api/users";
+import * as groupApi from "utils/api/groups";
+import { getCurrentUserId } from "selectors/index";
 
 export const RECIEVE_CREATE_USER = "RECIEVE_CREATE_USER";
 export const REQUEST_CREATE_USER = "REQUEST_CREATE_USER";
@@ -10,6 +12,8 @@ export const RECIEVE_USER_REPORT = "RECIEVE_USER_REPORT";
 export const REQUEST_USER_REPORT = "REQUEST_USER_REPORT";
 export const RECIEVE_USER = "RECIEVE_USER";
 export const REQUEST_USER = "REQUEST_USER";
+export const RECIEVE_AUTHORITY_OVER_GROUPS = "RECIEVE_AUTHORITY_OVER_GROUPS";
+export const REQUEST_AUTHORITY_OVER_GROUPS = "REQUEST_AUTHORITY_OVER_GROUPS";
 
 function recieveAllUsers(users) {
     return {
@@ -64,6 +68,21 @@ function recieveUser(id, user) {
         type: RECIEVE_USER,
         id,
         user
+    };
+}
+
+function requestAuthorityOverGroups(id) {
+    return {
+        type: REQUEST_AUTHORITY_OVER_GROUPS,
+        id
+    };
+}
+
+function recieveAuthorityOverGroups(id, groups) {
+    return {
+        type: RECIEVE_AUTHORITY_OVER_GROUPS,
+        id,
+        groups
     };
 }
 
@@ -143,5 +162,26 @@ export function updateUser(id) {
             .catch(() => {
                 // ignore errors
             });
+    };
+}
+
+export function updateAuthorityOverGroups(id) {
+    return dispatch => {
+        dispatch(requestAuthorityOverGroups(id));
+
+        groupApi
+            .getAuthorityOverGroups(id)
+            .then(groups => {
+                dispatch(recieveAuthorityOverGroups(id, groups));
+            })
+            .catch(() => {
+                // ignore errors
+            });
+    };
+}
+
+export function updateAuthorityOverGroupsCurrentUser() {
+    return (dispatch, getState) => {
+        dispatch(updateAuthorityOverGroups(getCurrentUserId(getState())));
     };
 }

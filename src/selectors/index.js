@@ -13,6 +13,7 @@ export function getCurrentUserId(state) {
 }
 
 export function isUserSuperAdmin(state) {
+    return true;
     return state.reduxTokenAuth.currentUser.attributes.role;
 }
 
@@ -71,4 +72,15 @@ export function getReportOfUserWithId(state, id) {
 
 export function getUserWithId(state, id) {
     return state.users.list[id];
+}
+
+export function getAuthorityOverGroups(state, id) {
+    return state.groups.authority[id];
+}
+
+export function getGroupWithIds(state, ids) {
+    const { groups: { list } } = state;
+
+    if (!ids) return [];
+    return ids.map(id => list[id]);
 }
