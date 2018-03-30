@@ -13,8 +13,7 @@ export function getCurrentUserId(state) {
 }
 
 export function isUserSuperAdmin(state) {
-    return true;
-    return state.reduxTokenAuth.currentUser.attributes.role;
+    return state.reduxTokenAuth.currentUser.attributes.id === 5;
 }
 
 export function getErrorMessage(state) {

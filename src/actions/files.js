@@ -1,7 +1,7 @@
 /* This file exports actions related to file list */
 
 import * as fileApi from "utils/api/files";
-import { getFileWithId } from "selectors/index";
+import { getFileWithId, getCurrentUserId } from "selectors/index";
 
 export const RECIEVE_ALL_FILES = "RECIEVE_ALL_FILES";
 export const REQUEST_ALL_FILES = "REQUEST_ALL_FILES";
@@ -15,11 +15,27 @@ export const REQUEST_FILE_HISTORY = "REQUEST_FILE_HISTORY";
 export const RECIEVE_FILE_HISTORY = "RECIEVE_FILE_HISTORY";
 export const REQUEST_UPDATE_FILE_STATUS = "REQUEST_UPDATE_FILE_STATUS";
 export const RECIEVE_UPDATE_FILE_STATUS = "RECIEVE_UPDATE_FILE_STATUS";
+export const REQUEST_RECIEVE_FILE = "REQUEST_RECIEVE_FILE";
+export const RECIEVE_RECIEVE_FILE = "RECIEVE_RECIEVE_FILE";
 
 function recieveAllFiles(files) {
     return {
         type: RECIEVE_ALL_FILES,
         files
+    };
+}
+
+function requestRecieveFile(id) {
+    return {
+        type: REQUEST_RECIEVE_FILE,
+        id
+    };
+}
+
+function recieveRecieveFile(file) {
+    return {
+        type: RECIEVE_RECIEVE_FILE,
+        file
     };
 }
 
@@ -186,6 +202,20 @@ export function updateFileStatus(id, status) {
             .updateFile(id, { ...file, status })
             .then(file => {
                 dispatch(recieveUpdateFileStatus(id, file));
+            })
+            .catch(() => {
+                // ignore errors
+            });
+    };
+}
+
+export function getFile(id) {
+    return dispatch => {
+        dispatch(requestRecieveFile(id));
+        fileApi
+            .recieveFile(id)
+            .then(file => {
+                dispatch(recieveRecieveFile(file));
             })
             .catch(() => {
                 // ignore errors

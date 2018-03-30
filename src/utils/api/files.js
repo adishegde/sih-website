@@ -74,3 +74,9 @@ export function updateFile(id, file) {
         })
         .then(({ data }) => transformFileResponse(data));
 }
+
+export function recieveFile(id, userId) {
+    return axios
+        .patch(`file/${id}`, { mode: "receive" })
+        .then(({ data }) => transformFileResponse(data));
+}
