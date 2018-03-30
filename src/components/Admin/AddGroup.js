@@ -42,7 +42,7 @@ class GroupAdd extends Component {
 
         return (
             <Segment basic>
-                <h1 align="center">Create Group</h1>
+                <h1 align="center">Create Section</h1>
                 <Form error={error}>
                     <Form.Input
                         fluid

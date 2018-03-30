@@ -19,7 +19,7 @@ export default function AdminMenu({ isAdmin }) {
                     to="/admin/user/create"
                 >
                     <Icon name="add user" />
-                    Create User
+                    Create Dispatch User
                 </Menu.Item>
                 <Menu.Item
                     name="createGroup"
@@ -27,7 +27,7 @@ export default function AdminMenu({ isAdmin }) {
                     to="/admin/group/create"
                 >
                     <Icon name="add square" />
-                    Create Group
+                    Create Section
                 </Menu.Item>
             </Menu.Menu>
         </Menu.Item>

@@ -46,7 +46,7 @@ export default class TransferModal extends Component {
             key: opt.id
         }));
 
-        const transferLabel = transferByUser ? "User" : "Department";
+        const transferLabel = transferByUser ? "User" : "Sections";
         const selectValue = transferByUser ? toTransferUser : toTransferGroup;
 
         return (
@@ -65,7 +65,7 @@ export default class TransferModal extends Component {
                     <Modal.Content>
                         <Message info size="small">
                             You can transfer file to a particular user or to the
-                            default node of a department
+                            to a section
                         </Message>
                         <Checkbox
                             toggle

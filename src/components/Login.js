@@ -64,7 +64,7 @@ export default class Login extends Component {
                                     name="email"
                                     value={email}
                                     iconPosition="left"
-                                    placeholder="Email Id"
+                                    placeholder="User Id"
                                 />
                                 <Form.Input
                                     fluid
