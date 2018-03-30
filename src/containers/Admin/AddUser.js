@@ -8,7 +8,7 @@ import AddUserComponent from "components/Admin/AddUser";
 import { updateGroupList } from "actions/groups";
 import { createUser } from "actions/users";
 import { getGroupList, isGroupLoading, isUserLoading } from "selectors/index";
-import { getNonDepartments, getDepartments } from "selectors/groups";
+import { getDepartments } from "selectors/groups";
 
 class AddUser extends Component {
     componentDidMount() {
@@ -27,8 +27,7 @@ function mapStateToProps(state) {
     const groupList = getGroupList(state);
 
     return {
-        groups: getNonDepartments(groupList),
-        departments: getDepartments(groupList),
+        groups: getDepartments(groupList),
         isFetchingGroups: isGroupLoading(state),
         isCreating: isUserLoading(state)
     };

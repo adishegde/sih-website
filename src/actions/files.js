@@ -1,7 +1,7 @@
 /* This file exports actions related to file list */
 
 import * as fileApi from "utils/api/files";
-import { getFileWithId, getCurrentUserId } from "selectors/index";
+import { getFileWithId } from "selectors/index";
 
 export const RECIEVE_ALL_FILES = "RECIEVE_ALL_FILES";
 export const REQUEST_ALL_FILES = "REQUEST_ALL_FILES";
