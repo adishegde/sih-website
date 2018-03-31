@@ -4,7 +4,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getFileWithId, getCurrentUserId } from "selectors/index";
+import { getFileWithId } from "selectors/index";
 import FilePageComponent from "components/FilePage/index";
 import { updateFile } from "actions/files";
 
