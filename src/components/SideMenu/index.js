@@ -7,6 +7,7 @@ import { WebsiteName } from "utils/resources";
 import { Link } from "react-router-dom";
 import FileMenu from "./FileMenu";
 import UserMenu from "containers/SideMenu/UserMenu";
+import SectionMenu from "components/SideMenu/SectionMenu";
 import AdminMenu from "containers/SideMenu/AdminMenu";
 
 export default function SideMenu({ isAdmin }) {
@@ -21,11 +22,8 @@ export default function SideMenu({ isAdmin }) {
                 <Link to="/">Dashboard</Link>
             </Menu.Item>
             <FileMenu />
+            <SectionMenu />
             <AdminMenu />
-            <Menu.Item>
-                <Icon name="industry" />
-                <Link to="/group/authority">Reports</Link>
-            </Menu.Item>
         </Menu>
     );
 }

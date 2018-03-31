@@ -5,11 +5,11 @@ import {
     Modal,
     Menu,
     Icon,
+    Input,
     Button,
     Message,
     Select,
-    Segment,
-    Checkbox
+    Segment
 } from "semantic-ui-react";
 
 export default class TransferModal extends Component {
@@ -17,13 +17,12 @@ export default class TransferModal extends Component {
         super(props);
 
         this.state = {
-            transferByUser: true,
-            toTransferUser: null,
-            toTransferGroup: null,
+            department: null,
+            section: null,
+            nextNode: "",
             isModalOpen: false
         };
 
-        this.toggleTransferMode = this.toggleTransferMode.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.openModal = this.openModal.bind(this);
@@ -31,23 +30,26 @@ export default class TransferModal extends Component {
     }
 
     render() {
-        const { users, departments, onModalMount } = this.props;
-        const {
-            transferByUser,
-            toTransferGroup,
-            toTransferUser,
-            isModalOpen
-        } = this.state;
+        const { sections, departments, onModalMount } = this.props;
+        const { section, department, nextNode, isModalOpen } = this.state;
 
-        let options = transferByUser ? users : departments;
-        options = options.map(opt => ({
-            text: opt.name,
-            value: opt.id,
-            key: opt.id
+        let departmentOptions = departments.map(dept => ({
+            text: dept.name,
+            value: dept.id,
+            key: dept.id
         }));
 
-        const transferLabel = transferByUser ? "User" : "Sections";
-        const selectValue = transferByUser ? toTransferUser : toTransferGroup;
+        let sectionOptions = [];
+        if (department)
+            sectionOptions = sections.filter(
+                section => section.deptId === department
+            );
+
+        sectionOptions = sectionOptions.map(section => ({
+            text: section.name,
+            value: section.id,
+            key: section.id
+        }));
 
         return (
             <Menu.Item name="transfer" onClick={this.openModal}>
@@ -64,25 +66,41 @@ export default class TransferModal extends Component {
                     <Modal.Header>Transfer File</Modal.Header>
                     <Modal.Content>
                         <Message info size="small">
-                            You can transfer file to a particular user or to the
-                            to a section
+                            The file can be transferred to a section in a
+                            department.
                         </Message>
-                        <Checkbox
-                            toggle
-                            onChange={this.toggleTransferMode}
-                            label={`Transfer Through ${transferLabel}`}
-                        />
                         <Segment basic padded>
                             <Select
                                 fluid
                                 selection
                                 search
                                 scrolling
-                                label={`Select ${transferLabel}`}
-                                placeholder={`Search ${transferLabel}`}
-                                value={selectValue}
-                                options={options}
+                                label="Select Department"
+                                placeholder="Select Department"
+                                value={department}
+                                options={departmentOptions}
                                 onChange={this.onSelectChange}
+                                name="department"
+                            />
+                            <Select
+                                fluid
+                                selection
+                                search
+                                scrolling
+                                label="Select Section"
+                                placeholder="Select Section"
+                                value={section}
+                                options={sectionOptions}
+                                onChange={this.onSelectChange}
+                                name="section"
+                            />
+                            <Input
+                                label="Next Node Details"
+                                fluid
+                                placeholder={"Next Node"}
+                                onChange={this.onSelectChange}
+                                value={nextNode}
+                                name="nextNode"
                             />
                         </Segment>
                         <Segment align="middle" basic>
@@ -98,36 +116,19 @@ export default class TransferModal extends Component {
         );
     }
 
-    toggleTransferMode() {
-        this.setState(({ transferByUser }) => ({
-            transferByUser: !transferByUser
-        }));
-    }
-
-    onSelectChange(event, { value }) {
-        this.setState(oldstate => {
-            if (oldstate.transferByUser)
-                return {
-                    toTransferUser: value
-                };
-
-            return {
-                toTransferGroup: value
-            };
+    onSelectChange(event, { name, value }) {
+        this.setState({
+            [name]: value
         });
     }
 
     onSubmit() {
-        const { transferByUser, toTransferUser, toTransferGroup } = this.state;
+        const { department, section, nextNode } = this.state;
         const { onTransfer } = this.props;
 
         this.closeModal();
 
-        if (transferByUser) {
-            onTransfer({ user_id: toTransferUser });
-        } else {
-            onTransfer({ group_id: toTransferGroup });
-        }
+        onTransfer({ department, section, nextNode });
     }
 
     openModal() {

@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Form, Message, Segment } from "semantic-ui-react";
 
-class AddSection extends Component {
+class AddDepartment extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             name: "",
             error: false,
-            sectionHeads: [],
-            department: null,
-            users: []
+            code: "",
+            head: null
         };
 
         this.onInputChange = this.onInputChange.bind(this);
@@ -18,14 +17,9 @@ class AddSection extends Component {
     }
 
     render() {
-        let { name, sectionHeads, users, error, department } = this.state;
+        let { name, head, error, code } = this.state;
 
-        let {
-            users: userOptions,
-            departments: departmentOptions,
-            isCreating,
-            isFetchingUsers
-        } = this.props;
+        let { users: userOptions, isCreating, isFetchingUsers } = this.props;
 
         userOptions = userOptions.map(user => ({
             key: user.id,
@@ -33,63 +27,38 @@ class AddSection extends Component {
             value: user.id
         }));
 
-        departmentOptions = departmentOptions.map(user => ({
-            key: user.id,
-            text: user.name,
-            value: user.id
-        }));
-
         return (
             <Segment basic>
-                <h1 align="center">Create Section</h1>
+                <h1 align="center">Create Department</h1>
                 <Form error={error}>
                     <Form.Input
                         fluid
-                        label="Name of Section"
-                        placeholder="Name of Section"
+                        label="Name of Department"
+                        placeholder="Name of Department"
                         onChange={this.onInputChange}
                         value={name}
                         name="name"
                     />
-                    <Form.Select
+                    <Form.Input
                         fluid
-                        multiple
-                        selection
-                        search
-                        scrolling
-                        label="Users"
-                        placeholder="Add Users"
-                        options={userOptions}
+                        label="Department Id"
+                        placeholder="Department Id"
                         onChange={this.onInputChange}
-                        value={users}
-                        loading={isFetchingUsers}
-                        name="users"
-                    />
-                    <Form.Select
-                        fluid
-                        multiple
-                        selection
-                        search
-                        scrolling
-                        label="Section Heads"
-                        placeholder="Section Heads"
-                        options={userOptions}
-                        onChange={this.onInputChange}
-                        value={sectionHeads}
-                        loading={isFetchingUsers}
-                        name="sectionHeads"
+                        value={code}
+                        name="code"
                     />
                     <Form.Select
                         fluid
                         selection
                         search
                         scrolling
-                        label="Department"
-                        placeholder="Select Department"
-                        options={departmentOptions}
+                        label="Department Head"
+                        placeholder="Select Department Head"
+                        options={userOptions}
                         onChange={this.onInputChange}
-                        value={department}
-                        name="department"
+                        value={head}
+                        loading={isFetchingUsers}
+                        name="head"
                     />
                     <div align="middle">
                         <Form.Button
@@ -104,7 +73,7 @@ class AddSection extends Component {
                     <Message
                         error
                         header="Action Forbidden"
-                        content="Please ensure that Name is not empty."
+                        content="Please ensure that Name and Head is not empty."
                     />
                 </Form>
             </Segment>
@@ -118,9 +87,9 @@ class AddSection extends Component {
     }
 
     onSubmit() {
-        const { name, department, users, sectionHeads } = this.state;
+        const { name, code, head } = this.state;
 
-        if (name === "") {
+        if (name === "" || !head) {
             this.setState({
                 error: true
             });
@@ -129,15 +98,14 @@ class AddSection extends Component {
                 error: false
             });
 
-            const { onCreateGroup } = this.props;
-            onCreateGroup({
+            const { onCreateDepartment } = this.props;
+            onCreateDepartment({
                 name,
-                users,
-                department,
-                sectionHeads
+                code,
+                head
             });
         }
     }
 }
 
-export default AddSection;
+export default AddDepartment;

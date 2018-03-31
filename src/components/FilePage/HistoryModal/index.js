@@ -43,6 +43,9 @@ export default function HistoryModal({ historyList, onModalMount }) {
                                 Changed By
                             </Table.HeaderCell>
                             <Table.HeaderCell rowSpan={2}>
+                                Next Node
+                            </Table.HeaderCell>
+                            <Table.HeaderCell rowSpan={2}>
                                 Status From
                             </Table.HeaderCell>
                             <Table.HeaderCell rowSpan={2}>

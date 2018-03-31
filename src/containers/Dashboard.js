@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import DashboardComponent from "components/Dashboard";
 import { connect } from "react-redux";
 import { updateFileList } from "actions/files";
-import { getFileList, getCurrentUserId } from "selectors/index";
+import { getFileList } from "selectors/index";
+import { updateCurrentUserDetails } from "actions/users";
 import {
     getFilesWithPriority,
     getFilesSortedByTimeRecieved
@@ -13,10 +14,11 @@ const NUM_ITEMS = 5;
 
 class Dashboard extends Component {
     componentDidMount() {
-        const { fetchFileList } = this.props;
+        const { fetchFileList, fetchUserDetail } = this.props;
 
         // Fetch files from server
         fetchFileList();
+        fetchUserDetail();
     }
 
     render() {
@@ -38,14 +40,6 @@ function mapStateToProps(state) {
         getFilesWithPriority(files, "low")
     ).slice(0, NUM_ITEMS);
 
-    const userId = getCurrentUserId(state);
-
-    highPriority = highPriority.filter(file => file.currentOwnerId === userId);
-    mediumPriority = mediumPriority.filter(
-        file => file.currentOwnerId === userId
-    );
-    lowPriority = lowPriority.filter(file => file.currentOwnerId === userId);
-
     return {
         highPriority,
         lowPriority,
@@ -57,6 +51,9 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchFileList: () => {
             dispatch(updateFileList());
+        },
+        fetchUserDetail: () => {
+            dispatch(updateCurrentUserDetails());
         }
     };
 }

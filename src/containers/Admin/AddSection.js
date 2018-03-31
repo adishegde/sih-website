@@ -7,13 +7,15 @@ import { withRouter } from "react-router-dom";
 import AddSectionComponent from "components/Admin/AddSection";
 import { createSection } from "actions/groups";
 import { updateUserList } from "actions/users";
-import { getUserList, isUserLoading } from "selectors/index";
+import { updateAllDepartments } from "actions/departments";
+import { getUserList, isUserLoading, getDepartmentList } from "selectors/index";
 
 class AddSection extends Component {
     componentDidMount() {
-        const { fetchUserList } = this.props;
+        const { fetchUserList, fetchDepartmentList } = this.props;
 
         fetchUserList();
+        fetchDepartmentList();
     }
 
     render() {
@@ -24,7 +26,8 @@ class AddSection extends Component {
 function mapStateToProps(state) {
     return {
         users: getUserList(state),
-        isFetchingUsers: isUserLoading(state)
+        isFetchingUsers: isUserLoading(state),
+        departments: getDepartmentList(state)
     };
 }
 
@@ -35,6 +38,9 @@ function mapDispatchToProps(dispatch, { history }) {
         },
         onCreateGroup: data => {
             dispatch(createSection(data, history));
+        },
+        fetchDepartmentList: data => {
+            dispatch(updateAllDepartments());
         }
     };
 }

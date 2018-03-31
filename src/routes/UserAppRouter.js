@@ -12,7 +12,7 @@ import FileRouter from "routes/FileRouter";
 import UserDashboard from "containers/Dashboard";
 import AdminRouter from "routes/AdminRouter";
 import UserRouter from "routes/UserRouter";
-import GroupRouter from "routes/GroupRouter";
+import SectionRouter from "routes/SectionRouter";
 
 function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
     if (isAuthenticating) {
@@ -39,7 +39,7 @@ function RouteIfSignedIn({ isAuthenticating, isSignedIn }) {
                     <Route path="/file" component={FileRouter} />
                     <Route path="/admin" component={AdminRouter} />
                     <Route path="/user" component={UserRouter} />
-                    <Route path="/group" component={GroupRouter} />
+                    <Route path="/section" component={SectionRouter} />
                 </div>
             </div>
         );

@@ -22,12 +22,20 @@ export default function AdminMenu({ isAdmin }) {
                     Create Dispatch User
                 </Menu.Item>
                 <Menu.Item
-                    name="createGroup"
+                    name="createSection"
                     as={NavLink}
-                    to="/admin/group/create"
+                    to="/admin/section/create"
                 >
                     <Icon name="add square" />
                     Create Section
+                </Menu.Item>
+                <Menu.Item
+                    name="createDepartment"
+                    as={NavLink}
+                    to="/admin/department/create"
+                >
+                    <Icon name="add square" />
+                    Create Department
                 </Menu.Item>
             </Menu.Menu>
         </Menu.Item>

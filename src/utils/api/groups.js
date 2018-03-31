@@ -6,7 +6,8 @@ import { transformResponseData } from "utils/api/transform";
 // Only keys that are to be changed is mapped. Other keys will remain as is.
 const groupMapping = {
     createdAt: "created_at",
-    updatedAt: "updated_at"
+    updatedAt: "updated_at",
+    deptId: "dept_id"
 };
 
 const transformGroupResponse = transformResponseData(groupMapping);

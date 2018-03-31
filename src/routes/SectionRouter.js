@@ -7,11 +7,8 @@ export default function() {
     return (
         <div className="groupRouter">
             <Switch>
-                <Route
-                    path="/group/authority"
-                    component={AuthorityOverGroups}
-                />
-                <Route path="/group/:id" component={GroupMembers} />
+                <Route path="/section/head" component={AuthorityOverGroups} />
+                <Route path="/section/:id" component={GroupMembers} />
             </Switch>
         </div>
     );

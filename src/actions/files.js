@@ -209,11 +209,11 @@ export function updateFileStatus(id, status) {
     };
 }
 
-export function getFile(id) {
+export function getFile(id, nextNode) {
     return dispatch => {
         dispatch(requestRecieveFile(id));
         fileApi
-            .recieveFile(id)
+            .recieveFile(id, { nextNode })
             .then(file => {
                 dispatch(recieveRecieveFile(file));
             })

@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Modal, Menu, Header, Icon, Segment } from "semantic-ui-react";
+import {
+    Modal,
+    Menu,
+    Header,
+    Icon,
+    Segment,
+    Input,
+    Button
+} from "semantic-ui-react";
 import QRCodeReader from "components/QRCodeReader";
 
 export default class UpdateStatusModal extends Component {
@@ -7,16 +15,23 @@ export default class UpdateStatusModal extends Component {
         super(props);
 
         this.state = {
-            isModalOpen: false
+            isModalOpen: false,
+            isInnerModalOpen: false,
+            nextNode: "",
+            qrcodeData: null
         };
 
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.closeInnerModal = this.closeInnerModal.bind(this);
+        this.openInnerModal = this.openInnerModal.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.onQRCodeScan = this.onQRCodeScan.bind(this);
     }
 
     render() {
-        const { isModalOpen } = this.state;
+        const { isModalOpen, nextNode, isInnerModalOpen } = this.state;
 
         return (
             <Menu.Item name="transfer" onClick={this.openModal}>
@@ -26,26 +41,45 @@ export default class UpdateStatusModal extends Component {
                     open={isModalOpen}
                     closeIcon
                     onClose={this.closeModal}
-                    closeOnEscape={false}
                     closeOnDimmerClick={false}
                 >
-                    <Modal.Header>Recieve File</Modal.Header>
+                    <Modal.Header>Receive File</Modal.Header>
                     <Modal.Content>
                         <Header as="h4">Scan QRCode</Header>
                         <Segment align="center">
                             <QRCodeReader onScan={this.onQRCodeScan} />
                         </Segment>
+                        <Modal open={isInnerModalOpen}>
+                            <Modal.Header>Receive File</Modal.Header>
+                            <Modal.Content>
+                                <Input
+                                    value={nextNode}
+                                    placeholder="Sending to"
+                                    onChange={this.onInputChange}
+                                />
+                                <Button onClick={this.onSubmit} positive>
+                                    Submit
+                                </Button>
+                            </Modal.Content>
+                        </Modal>
                     </Modal.Content>
                 </Modal>
             </Menu.Item>
         );
     }
 
-    onQRCodeScan(data) {
-        const { onQRCodeScan: recieveData } = this.props;
+    onInputChange(event, { name, value }) {
+        this.setState({
+            nextNode: value
+        });
+    }
 
-        this.closeModal();
-        recieveData(data);
+    onQRCodeScan(data) {
+        this.setState({
+            qrcode: data
+        });
+
+        this.openInnerModal();
     }
 
     openModal() {
@@ -54,9 +88,31 @@ export default class UpdateStatusModal extends Component {
         });
     }
 
+    openInnerModal() {
+        this.setState({
+            isInnerModalOpen: true
+        });
+    }
+
+    closeInnerModal() {
+        this.setState({
+            isInnerModalOpen: false
+        });
+    }
+
     closeModal() {
         this.setState({
             isModalOpen: false
         });
+    }
+
+    onSubmit() {
+        const { onQRCodeScan: recieveData } = this.props;
+        const { qrcode, nextNode } = this.state;
+
+        this.closeInnerModal();
+        this.closeModal();
+
+        recieveData({ qrcode, nextNode });
     }
 }

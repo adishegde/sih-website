@@ -33,7 +33,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch, { history }) {
     return {
         onClickItem: id => {
-            history.push(`/group/${id}`);
+            history.push(`/section/${id}`);
         },
         fetchAuthorityOverGroups: () => {
             dispatch(updateAuthorityOverGroupsCurrentUser());

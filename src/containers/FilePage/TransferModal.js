@@ -2,16 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { transferFile } from "actions/files";
-import { updateUserList } from "actions/users";
 import { updateGroupList } from "actions/groups";
+import { updateAllDepartments } from "actions/departments";
 import TransferModalComponent from "components/FilePage/TransferModal";
 import {
-    getUserList,
+    getDepartmentList,
     getFileWithId,
     getGroupList,
     getCurrentUserId
 } from "selectors/index";
-import { getDepartments } from "selectors/groups";
+import { getSections } from "selectors/groups";
 import { getFileOwner, getFileStatus } from "selectors/files";
 
 function TransferModal(props) {
@@ -26,22 +26,29 @@ function TransferModal(props) {
 
 function mapStateToProps(state, { match: { params } }) {
     return {
-        users: getUserList(state),
         currentUser: getCurrentUserId(state),
         fileStatus: getFileStatus(getFileWithId(state, params.id)),
         fileOwner: getFileOwner(getFileWithId(state, params.id)),
-        departments: getDepartments(getGroupList(state))
+        sections: getSections(getGroupList(state)),
+        departments: getDepartmentList(state)
     };
 }
 
 function mapDispatchToProps(dispatch, { match: { params } }) {
     return {
         onTransfer: transferData => {
-            dispatch(transferFile(params.id, transferData));
+            const { department, section, nextNode } = transferData;
+            dispatch(
+                transferFile(params.id, {
+                    deptId: department,
+                    sectionId: section,
+                    nextNode
+                })
+            );
         },
         onModalMount: () => {
-            dispatch(updateUserList());
             dispatch(updateGroupList());
+            dispatch(updateAllDepartments());
         }
     };
 }

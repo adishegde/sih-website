@@ -2,9 +2,10 @@
  * the file from the URL */
 
 import React, { Component } from "react";
+import { Message } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { getFileWithId } from "selectors/index";
+import { getFileWithId, getCurrentUserId } from "selectors/index";
 import FilePageComponent from "components/FilePage/index";
 import { updateFile } from "actions/files";
 
@@ -16,6 +17,14 @@ class FilePage extends Component {
     }
 
     render() {
+        const { status, currentOwnerId, currentUser } = this.props;
+        if (status === "intransit" || currentUser !== currentOwnerId)
+            return (
+                <Message
+                    error
+                    content="The QRCode should be scanned to view the details"
+                />
+            );
         return <FilePageComponent {...this.props} />;
     }
 }
@@ -25,7 +34,8 @@ function mapStateToProps(state, { match: { params } }) {
 
     return {
         ...file,
-        id: params.id
+        id: params.id,
+        currentUser: getCurrentUserId(state)
     };
 }
 

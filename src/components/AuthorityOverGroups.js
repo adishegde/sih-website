@@ -7,7 +7,7 @@ export default function AuthorityOverGroups({ groups, onClickItem }) {
         return (
             <div className="AuthorityOverGroups">
                 <Message error size="small">
-                    You don't have authority over any group currently
+                    You are currently not head of any section
                 </Message>
             </div>
         );
@@ -15,7 +15,7 @@ export default function AuthorityOverGroups({ groups, onClickItem }) {
     return (
         <div className="AuthorityOverGroups">
             <Message info size="small">
-                This is the list of groups over which you have authority
+                You are head of following sections
             </Message>
             <GroupTable
                 groups={groups}

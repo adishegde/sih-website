@@ -94,3 +94,7 @@ export function getUserWithIds(state, ids) {
 export function getGroupMembers(state, id) {
     return state.groups.members[id];
 }
+
+export function getDepartmentList(state) {
+    return Object.values(state.departments.list);
+}

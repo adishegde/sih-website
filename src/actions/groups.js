@@ -86,8 +86,8 @@ export function updateGroupList() {
 export function createGroup(data) {
     return async dispatch => {
         dispatch(requestCreateGroup());
-        const { name, users, authorityOver, isDepartment } = data;
-        const createGroupData = { name, isDepartment };
+        const { name, users, authorityOver, isDepartment, dept_id } = data;
+        const createGroupData = { name, isDepartment, dept_id };
 
         try {
             const group = await groupApi.createGroup(createGroupData);
@@ -132,20 +132,29 @@ export function updateGroupMembers(id) {
     };
 }
 
-export function createSection({ users, name, sectionHeads }, history) {
+export function createSection(
+    { users, name, department, sectionHeads },
+    history
+) {
     return async dispatch => {
         dispatch(requestCreateSection());
 
         try {
             const section = await dispatch(
-                createGroup({ name, users, isDepartment: true })
+                createGroup({
+                    name,
+                    users,
+                    isDepartment: true,
+                    dept_id: department
+                })
             );
             const sectionHead = await dispatch(
                 createGroup({
                     name: `${name} Head`,
                     users: sectionHeads,
                     authorityOver: [section.id],
-                    isDepartment: false
+                    isDepartment: false,
+                    dept_id: department
                 })
             );
 

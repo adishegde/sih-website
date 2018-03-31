@@ -7,6 +7,7 @@ export default function HistoryItem({
     changedBy,
     statusFrom,
     statusTo,
+    nextNode,
     changedOn
 }) {
     return (
@@ -14,6 +15,7 @@ export default function HistoryItem({
             <Table.Cell>{id}</Table.Cell>
             <Table.Cell>{changedBy.name}</Table.Cell>
             <Table.Cell>{changedBy.id}</Table.Cell>
+            <Table.Cell>{nextNode}</Table.Cell>
             <Table.Cell>{statusToDisplay(statusFrom)}</Table.Cell>
             <Table.Cell>{statusToDisplay(statusTo)}</Table.Cell>
             <Table.Cell>{new Date(changedOn).toDateString()}</Table.Cell>

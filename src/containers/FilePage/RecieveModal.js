@@ -5,9 +5,9 @@ import { getFile } from "actions/files";
 
 function mapDispatchToProps(dispatch, { match: { params } }) {
     return {
-        onQRCodeScan: data => {
-            const id = atob(data).slice(5);
-            dispatch(getFile(id));
+        onQRCodeScan: ({ qrcode, nextNode }) => {
+            const id = atob(qrcode).slice(5);
+            dispatch(getFile(id, nextNode));
         }
     };
 }

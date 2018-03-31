@@ -6,6 +6,8 @@ import { reduxTokenAuthReducer } from "redux-token-auth";
 import filesReducer from "reducers/files/index";
 import groupsReducer from "reducers/groups/index";
 import usersReducer from "reducers/users/index";
+import departmentReducer from "reducers/departments/index";
+import currentUserReducer from "reducers/currentUser";
 import { initialState } from "configureStore";
 
 // combineReducers returns root reducer
@@ -15,7 +17,9 @@ const appReducer = combineReducers({
     error: errorReducer,
     files: filesReducer,
     groups: groupsReducer,
-    users: usersReducer
+    users: usersReducer,
+    departments: departmentReducer,
+    currentUser: currentUserReducer
 });
 
 // Clears state on sign out else delegates to appReducer

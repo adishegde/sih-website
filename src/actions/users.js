@@ -14,11 +14,26 @@ export const RECIEVE_USER = "RECIEVE_USER";
 export const REQUEST_USER = "REQUEST_USER";
 export const RECIEVE_AUTHORITY_OVER_GROUPS = "RECIEVE_AUTHORITY_OVER_GROUPS";
 export const REQUEST_AUTHORITY_OVER_GROUPS = "REQUEST_AUTHORITY_OVER_GROUPS";
+export const RECIEVE_CURRENT_USER = "RECIEVE_CURRENT_USER";
+export const REQUEST_CURRENT_USER = "REQUEST_CURRENT_USER";
 
 function recieveAllUsers(users) {
     return {
         type: RECIEVE_ALL_USERS,
         users
+    };
+}
+
+function requestCurrentUserDetails() {
+    return {
+        type: REQUEST_CURRENT_USER
+    };
+}
+
+function receiveCurrentUserDetails(user) {
+    return {
+        type: RECIEVE_CURRENT_USER,
+        user
     };
 }
 
@@ -183,5 +198,21 @@ export function updateAuthorityOverGroups(id) {
 export function updateAuthorityOverGroupsCurrentUser() {
     return (dispatch, getState) => {
         dispatch(updateAuthorityOverGroups(getCurrentUserId(getState())));
+    };
+}
+
+export function updateCurrentUserDetails() {
+    return (dispatch, getState) => {
+        const currentUserId = getCurrentUserId(getState());
+        dispatch(requestCurrentUserDetails());
+
+        userApi
+            .getUser(currentUserId)
+            .then(user => {
+                dispatch(receiveCurrentUserDetails(user));
+            })
+            .catch(() => {
+                // ignore error
+            });
     };
 }
