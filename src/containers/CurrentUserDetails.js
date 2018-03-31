@@ -2,10 +2,12 @@ import UserDetail from "components/UserDetails";
 import { connect } from "react-redux";
 
 function mapStateToProps(state) {
+    let user = state.currentUser.user;
+    if (!user) user = {};
     return {
-        name: state.currentUser.name,
-        email: state.currentUser.email,
-        role: state.currentUser.role
+        name: user.name,
+        email: user.email,
+        role: user.role
     };
 }
 

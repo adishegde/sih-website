@@ -13,7 +13,8 @@ export function getCurrentUserId(state) {
 }
 
 export function isUserSuperAdmin(state) {
-    return state.currentUser.role === "superadmin";
+    if (!state.currentUser.user) return false;
+    return state.currentUser.user.role === "superadmin";
 }
 
 export function getErrorMessage(state) {

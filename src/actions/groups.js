@@ -2,6 +2,7 @@
 
 import * as groupApi from "utils/api/groups";
 import * as userApi from "utils/api/users";
+import { getCurrentUserId } from "selectors/index";
 
 export const RECIEVE_ALL_GROUPS = "RECIEVE_ALL_GROUPS";
 export const REQUEST_ALL_GROUPS = "REQUEST_ALL_GROUPS";
@@ -11,10 +12,18 @@ export const RECIEVE_GROUP_MEMBERS = "RECIEVE_GROUP_MEMBERS";
 export const REQUEST_GROUP_MEMBERS = "REQUEST_GROUP_MEMBERS";
 export const RECIEVE_CREATE_SECTION = "RECIEVE_CREATE_SECTION";
 export const REQUEST_CREATE_SECTION = "REQUEST_CREATE_SECTION";
+export const RECIEVE_CURRENT_USER_GROUPS = "RECIEVE_CURRENT_USER_GROUP";
 
 function recieveAllGroups(groups) {
     return {
         type: RECIEVE_ALL_GROUPS,
+        groups
+    };
+}
+
+function recieveCurrentUserGroups(groups) {
+    return {
+        type: RECIEVE_CURRENT_USER_GROUPS,
         groups
     };
 }
@@ -163,5 +172,20 @@ export function createSection(
         } catch (err) {
             // ignore errors
         }
+    };
+}
+
+export function updateGroupsOfCurrentUser() {
+    return (dispatch, getState) => {
+        const userId = getCurrentUserId(getState());
+
+        groupApi
+            .getGroupsOfUser(userId)
+            .then(groups => {
+                dispatch(recieveCurrentUserGroups(groups));
+            })
+            .catch(() => {
+                // ignore errors
+            });
     };
 }

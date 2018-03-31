@@ -39,3 +39,9 @@ export function getAuthorityOverGroups(id) {
         .get(`/users/${id}/authorityover`)
         .then(({ data }) => data.map(group => transformGroupResponse(group)));
 }
+
+export function getGroupsOfUser(id) {
+    return axios
+        .get(`/users/${id}/groups`)
+        .then(({ data }) => data.map(group => transformGroupResponse(group)));
+}

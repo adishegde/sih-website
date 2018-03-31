@@ -16,7 +16,7 @@ export default function GroupTable({ groups, tableName, onClickItem }) {
         <GroupItem
             {...group}
             key={group.id}
-            onClick={onClickItem.bind(null, group.id)}
+            onClick={onClickItem ? onClickItem.bind(null, group.id) : null}
         />
     ));
 
